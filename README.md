@@ -1,3 +1,3 @@
 # Polemon
 
-Object-Oriented Programming 
+Object-Oriented Programming final project.
