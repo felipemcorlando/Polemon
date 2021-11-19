@@ -13,5 +13,6 @@ public class Game {
 			//updateBoard();
 		}
 		System.out.println("Game terminated. Bye!");
+		//Comentário teste
 	}
 }
