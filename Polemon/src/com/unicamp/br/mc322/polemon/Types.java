@@ -1,7 +1,7 @@
 package com.unicamp.br.mc322.polemon;
 
 public enum Types {
-	Fire, Grass, Water, Eletric, Normal;
+	Fire, Grass, Water, Electric, Normal;
 
 	public double typesRelations(Types attackingType, Types defendingType){
 		/*This method returns a multiplier to be applied in the damage given to the defending
