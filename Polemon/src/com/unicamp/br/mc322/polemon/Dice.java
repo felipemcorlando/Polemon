@@ -1,6 +1,5 @@
 package com.unicamp.br.mc322.polemon;
 
-<<<<<<< HEAD
 public final class Dice {
 
 	public static int roll(int faces, int nDices) {
@@ -10,8 +9,5 @@ public final class Dice {
 		
 		return total;
 	}
-=======
-public class Dice {
-//this is a static class
->>>>>>> branch 'main' of https://gitlab.com/f170926/polemon.git
 }
+
