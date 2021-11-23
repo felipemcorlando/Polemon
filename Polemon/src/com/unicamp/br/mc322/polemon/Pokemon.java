@@ -3,7 +3,7 @@ package com.unicamp.br.mc322.polemon;
 public class Pokemon {
 	
 	private Types type;
-	private int hp; //Must be a positive value;
+	private double hp; //Must be a positive value;
 	private int attackPoints; //Must be a value between 0 and 15;
 	private int defensePoints; //Must be a value between 0 and 15;
 	
@@ -28,8 +28,15 @@ public class Pokemon {
 	}
 
 
-	public int getHp() {
+	public double getHp() {
 		return hp;
+	}
+	
+	public void setHp(double newHp) {
+		if(newHp < 0) {
+			newHp = 0;
+		}
+		this.hp = 0;
 	}
 
 
