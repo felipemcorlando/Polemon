@@ -22,7 +22,7 @@ public enum Types {
 				return 0.5;
 			else if(attackingType == Types.Grass)
 				return 2;
-			else if(attackingType == Types.Eletric)
+			else if(attackingType == Types.Electric)
 				return 2;
 			else
 				return 1;
@@ -33,12 +33,12 @@ public enum Types {
 				return 0.5;
 			else if(attackingType == Types.Grass)
 				return 0.5;
-			else if(attackingType == Types.Eletric)
+			else if(attackingType == Types.Electric)
 				return 0.5;
 			else
 				return 1;
-		}else if(defendingType == Types.Eletric) {
-			if(attackingType == Types.Eletric)
+		}else if(defendingType == Types.Electric) {
+			if(attackingType == Types.Electric)
 				return 0.5;
 			else
 				return 1;
