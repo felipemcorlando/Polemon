@@ -1,5 +1,13 @@
 package com.unicamp.br.mc322.polemon.habilities;
 
-public class ActiveHability {
+import com.unicamp.br.mc322.polemon.Pokemon;
+
+public class ActiveHability implements IHability{
+
+	@Override
+	public void useHability(Pokemon attacker, Pokemon defender) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
