@@ -10,7 +10,7 @@ public enum Types {
 			if(attackingType == Types.Water)
 				return 2;
 			else if(attackingType == Types.Fire)
-				return 0.5;
+				return (float) 0.5;
 			else if(attackingType == Types.Grass)
 				return 0.5;
 			else
