@@ -4,8 +4,8 @@ public class Pokemon {
 	
 	private Types type;
 	private double hp; //Must be a positive value;
-	private int attackPoints; //Must be a value between 0 and 15;
-	private int defensePoints; //Must be a value between 0 and 15;
+	private int attackPoints; //Must be a initial value between 0 and 15;
+	private int defensePoints; //Must be a initial value between 0 and 15;
 	
 	public Pokemon(Types type, int newHP, int newAttackPoints, int newDefensePoints) throws IllegalValueException{
 		this.type = type;
