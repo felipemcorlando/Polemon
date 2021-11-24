@@ -1,6 +1,7 @@
 package com.unicamp.br.mc322.polemon;
 
 import java.io.*;
+import java.nio.file.*;
 
 public final class Input {
 
@@ -54,6 +55,16 @@ public final class Input {
 			System.out.println(e.getMessage());
 		}
 
+		return "";
+	}
+	
+	public static String readLineFromFile(String path, int n) {
+		try {
+			return Files.readAllLines(Paths.get(path)).get(n);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 		return "";
 	}
 }
