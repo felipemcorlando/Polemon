@@ -15,8 +15,24 @@ public final class Input {
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
-		
+
 		return "";
+	}
+
+	public static int countLines (String path) {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			String strLine;
+			int count = 0;
+			while ((strLine = br.readLine()) != null) 
+				count++;
+			
+			return count;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return 0;
 	}
 
 	public static String readFile (String path) {
