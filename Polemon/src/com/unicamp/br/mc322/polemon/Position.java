@@ -40,4 +40,13 @@ public class Position {
 		
 		return this;
 	}
+	
+	public Position travel(int x, int y, int z) {
+		this.x += x;
+		this.y += y;
+		this.z += z;
+		
+		return this;
+	}
+	
 }
