@@ -83,4 +83,20 @@ public class Pokemon {
 	public int getDefensePoints() {
 		return defensePoints;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public int getD() {
+		return d;
+	}
+
+	public int getK() {
+		return k;
+	}
 }
