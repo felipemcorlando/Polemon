@@ -8,4 +8,6 @@ public interface IAbility {
 	
 	public boolean canLearn(Pokemon learner);
 	
+	public String getName();
+	
 }
