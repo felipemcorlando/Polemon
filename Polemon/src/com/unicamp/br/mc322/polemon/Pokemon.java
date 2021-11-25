@@ -54,6 +54,14 @@ public class Pokemon {
 		this.k = Dice.roll(4, 2);
 	}
 	
+	public void teachAbility(IAbility newAb, int abIndex) throws IndexOutOfBoundsException{ //abIndex is an integer from 1 to 4;
+		if(abIndex > 4 || abIndex < 1) {
+			abIndex = 1; 
+			throw new IndexOutOfBoundsException("Index must be a value between 1 and 4!");
+		}
+		this.abilities[abIndex-1] = newAb;
+	}
+	
 	public Types[] getType() {
 		return type;
 	}
