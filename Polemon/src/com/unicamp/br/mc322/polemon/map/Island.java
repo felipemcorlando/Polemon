@@ -3,6 +3,7 @@ package com.unicamp.br.mc322.polemon.map;
 import com.unicamp.br.mc322.polemon.Pokemon;
 import com.unicamp.br.mc322.polemon.Position;
 import com.unicamp.br.mc322.polemon.Types;
+import com.unicamp.br.mc322.polemon.items.Collectable;
 
 public class Island {
 	Position position ; // posição superior esquerda ;
