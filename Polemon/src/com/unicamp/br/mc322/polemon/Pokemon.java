@@ -1,35 +1,69 @@
 package com.unicamp.br.mc322.polemon;
 
+import com.unicamp.br.mc322.polemon.habilities.IAbility;
+
 public class Pokemon {
 	
-	private Types type;
+	private String name;
+	private Types[] type = new Types[2];
 	private double hp; //Must be a positive value;
+	private int initialHp;
 	private int attackPoints; //Must be a initial value between 0 and 15;
 	private int defensePoints; //Must be a initial value between 0 and 15;
+	private IAbility[] abilities = new IAbility[4]; //The 4 initial standard abilities of the pokemon;
+	private Position position; //Pokemon initial Position;
+	private int d; //Distância máxima de captura;
+	private int k; //Dificuldade da captura, vai de 2(mais dificil) a 8(mais facil).
 	
-	public Pokemon(Types type, int newHP, int newAttackPoints, int newDefensePoints) throws IllegalValueException{
-		this.type = type;
+	
+	public Pokemon(String name, Types type1, Types type2, int newHP, int newAttackPoints, int newDefensePoints,IAbility ab1, IAbility ab2, IAbility ab3, IAbility ab4, Position position) throws IllegalValueException{
+		//Set the name:
+		this.name = name;
+		//Set the pokemon type:
+		this.type[0] = type1;
+		this.type[1] = type2;
+		//Set the pokemon HP:
 		if(newHP < 0) {
-			this.hp = 0;
+			newHP = 0;
 			throw new IllegalValueException("Hit Points must be a positive value");
 		}
+		this.hp = newHP;
+		this.initialHp = newHP;
+		//Set the pokemon Attack Points:
 		if(newAttackPoints > 15 || newAttackPoints < 0) {
-			this.attackPoints = 0;
+			newAttackPoints = 0;
 			throw new IllegalValueException("Attack Points must be between 0 and 15");
 		}
+		this.attackPoints = newAttackPoints;
+		//Set the pokemon Defense Points:
 		if(newDefensePoints > 15 || newDefensePoints < 0) {
-			this.defensePoints = 0;
+			newDefensePoints = 0;
 			throw new IllegalValueException("Defense Points must be between 0 and 15");
 		}	
+		this.defensePoints = newDefensePoints;
+		//Set the pokemon standard abilities
+		this.abilities[0] = ab1;
+		this.abilities[1] = ab2;
+		this.abilities[2] = ab3;
+		this.abilities[3] = ab4;
+		//Set the pokemon initial position:
+		this.position = position;
+		//Set d:
+		this.d = Dice.roll(4, 1);
+		//Set k:
+		this.k = Dice.roll(4, 2);
 	}
 	
-	public Types getType() {
+	public Types[] getType() {
 		return type;
 	}
 
-
 	public double getHp() {
 		return hp;
+	}
+	
+	public int getInitialHp() {
+		return this.initialHp;
 	}
 	
 	public void setHp(double newHp) {
