@@ -67,10 +67,11 @@ public class Pokemon {
 	}
 	
 	public void setHp(double newHp) {
-		if(newHp < 0) {
+		if(newHp <= 0) 
 			newHp = 0;
-		}
-		this.hp = 0;
+		else if(newHp >= this.initialHp)
+			newHp = initialHp;
+		this.hp = newHp;
 	}
 
 
