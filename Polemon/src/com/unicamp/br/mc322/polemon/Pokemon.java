@@ -54,6 +54,14 @@ public class Pokemon {
 		this.k = Dice.roll(4, 2);
 	}
 	
+	public void teachAbility(IAbility newAb, int abIndex) throws IndexOutOfBoundsException{ //abIndex is an integer from 1 to 4;
+		if(abIndex > 4 || abIndex < 1) {
+			abIndex = 1; 
+			throw new IndexOutOfBoundsException("Index must be a value between 1 and 4!");
+		}
+		this.abilities[abIndex-1] = newAb;
+	}
+	
 	public Types[] getType() {
 		return type;
 	}
@@ -67,10 +75,11 @@ public class Pokemon {
 	}
 	
 	public void setHp(double newHp) {
-		if(newHp < 0) {
+		if(newHp <= 0) 
 			newHp = 0;
-		}
-		this.hp = 0;
+		else if(newHp >= this.initialHp)
+			newHp = initialHp;
+		this.hp = newHp;
 	}
 
 
@@ -81,5 +90,21 @@ public class Pokemon {
 
 	public int getDefensePoints() {
 		return defensePoints;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public int getD() {
+		return d;
+	}
+
+	public int getK() {
+		return k;
 	}
 }
