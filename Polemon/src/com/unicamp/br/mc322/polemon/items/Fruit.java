@@ -26,7 +26,8 @@ public class Fruit implements Collectable{
 		// TODO Auto-generated method stub
 		return this.position;
 	}
-
+	
+	@Override
 	public String getName() {
 		return name;
 	}

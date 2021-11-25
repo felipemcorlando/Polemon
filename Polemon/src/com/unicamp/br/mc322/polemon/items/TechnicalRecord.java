@@ -25,6 +25,7 @@ public class TechnicalRecord implements Collectable {
 		return position;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
