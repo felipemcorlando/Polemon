@@ -9,4 +9,6 @@ public interface Collectable {
 	
 	public Position getPosition();
 	
+	public String getName();
+	
 }
