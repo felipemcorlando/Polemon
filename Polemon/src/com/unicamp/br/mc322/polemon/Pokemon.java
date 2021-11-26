@@ -10,8 +10,8 @@ public class Pokemon {
 	private Types[] type = new Types[2];
 	private double hp; //Must be a positive value;
 	private int initialHp;
-	private int attackPoints; //Must be a initial value between 0 and 15;
-	private int defensePoints; //Must be a initial value between 0 and 15;
+	private int attackPoints; //Must be a positive value;
+	private int defensePoints; //Must be a positive value;
 	private ArrayList<IAbility> abilities = new ArrayList<IAbility>(); //The abilities list of the pokemon, there is no max index
 	private Position position; //Pokemon initial Position;
 	private int d; //Distância máxima de captura;
