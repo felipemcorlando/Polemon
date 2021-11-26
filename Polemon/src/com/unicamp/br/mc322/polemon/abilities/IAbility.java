@@ -1,4 +1,4 @@
-package com.unicamp.br.mc322.polemon.habilities;
+package com.unicamp.br.mc322.polemon.abilities;
 
 import com.unicamp.br.mc322.polemon.Pokemon;
 

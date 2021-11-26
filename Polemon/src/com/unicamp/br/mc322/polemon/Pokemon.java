@@ -1,7 +1,8 @@
 package com.unicamp.br.mc322.polemon;
 
 import java.util.ArrayList;
-import com.unicamp.br.mc322.polemon.habilities.IAbility;
+
+import com.unicamp.br.mc322.polemon.abilities.IAbility;
 
 public class Pokemon {
 	
@@ -9,8 +10,8 @@ public class Pokemon {
 	private Types[] type = new Types[2];
 	private double hp; //Must be a positive value;
 	private int initialHp;
-	private int attackPoints; //Must be a initial value between 0 and 15;
-	private int defensePoints; //Must be a initial value between 0 and 15;
+	private int attackPoints; //Must be a positive value;
+	private int defensePoints; //Must be a positive value;
 	private ArrayList<IAbility> abilities = new ArrayList<IAbility>(); //The abilities list of the pokemon, there is no max index
 	private Position position; //Pokemon initial Position;
 	private int d; //Distância máxima de captura;
@@ -24,23 +25,11 @@ public class Pokemon {
 		this.type[0] = type1;
 		this.type[1] = type2;
 		//Set the pokemon HP:
-		if(newHP < 0) {
-			newHP = 0;
-			throw new IllegalValueException("Hit Points must be a positive value");
-		}
 		this.hp = newHP;
 		this.initialHp = newHP;
 		//Set the pokemon Attack Points:
-		if(newAttackPoints > 15 || newAttackPoints < 0) {
-			newAttackPoints = 0;
-			throw new IllegalValueException("Attack Points must be between 0 and 15");
-		}
 		this.attackPoints = newAttackPoints;
 		//Set the pokemon Defense Points:
-		if(newDefensePoints > 15 || newDefensePoints < 0) {
-			newDefensePoints = 0;
-			throw new IllegalValueException("Defense Points must be between 0 and 15");
-		}	
 		this.defensePoints = newDefensePoints;
 		//Set the pokemon standard abilities
 		this.abilities.add(ab1);
