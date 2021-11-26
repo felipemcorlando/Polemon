@@ -16,7 +16,7 @@ public class TechnicalRecord implements Collectable {
 		if(ability.canLearn(target)) {
 			target.teachAbility(ability);
 		}
-		//O que faço se não der para aprender.
+		//Usar método do gustavo para printar erro.
 	}
 
 	@Override
