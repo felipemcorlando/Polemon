@@ -14,6 +14,10 @@ public class PokemonBag {
 		this.pokemonList.remove(pokemon);
 	}
 	
+	public ArrayList<Pokemon> getPokemonList() {
+		return this.pokemonList;
+	}
+	
 	public Pokemon getItem(String name) {
 		Pokemon pokemon = null;
 		for(Pokemon p : this.pokemonList) {
