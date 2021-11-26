@@ -27,7 +27,7 @@ public class Game {
 	private void loadMappables(int plans) {
 		this.plans = new ArrayList<Plan>(plans);
 		for (int i = 0; i < plans; i++)
-			this.plans.add(new Plan());
+			this.plans.add(new Plan(i, 8));
 	}
 
 	public void printException(String error) {
@@ -36,10 +36,11 @@ public class Game {
 
 	private void loadPokemons(String path) {
 		this.wildPokemons = new ArrayList<Pokemon>();
-		for (int i = 0; i < Input.countLines(path); i++) 
-			this.wildPokemons.add(new Pokemon(Input.readLineFromFile(path, i)));
-
-		//salva os pokemons em suas respectivas ilhas
+		for (int i = 0; i < Input.countLines(path); i++) {
+			Pokemon p = new Pokemon(Input.readLineFromFile(path, i));
+			this.wildPokemons.add(p);
+			getIslandByPosition(p.getPosition()).addPokemon(p);
+		}
 	}
 
 	private void loadCollectables() {}
@@ -58,8 +59,12 @@ public class Game {
 
 	}
 
-	private Island getActualIsland() {
+	private Island getPlayerActualIsland() {
 		return this.plans.get(this.player.getGlobalPosition().getZ()).findIsland(this.player.getGlobalPosition());
+	}
+
+	private Island getIslandByPosition(Position pos) {
+		return this.plans.get(pos.getZ()).findIsland(pos);	
 	}
 
 	private boolean inMovementMode() {
@@ -77,7 +82,7 @@ public class Game {
 	private void updateGame(String command) {
 		if (!this.player.isInCombat()) { //is in movement/action mode
 			if (this.inMovementMode()) { 
-				Island island = this.getActualIsland();
+				Island island = this.getPlayerActualIsland();
 
 				switch(command) {
 				case "w":
@@ -188,7 +193,7 @@ public class Game {
 		Position playerPosition = this.player.getGlobalPosition();
 		System.out.println("Position: ("+playerPosition.getX()+","+playerPosition.getY()+")");
 
-		Island island = this.getActualIsland();
+		Island island = this.getPlayerActualIsland();
 
 		//create the island matrix representation
 		int size = island.getSize() + 2; //+2, the border
