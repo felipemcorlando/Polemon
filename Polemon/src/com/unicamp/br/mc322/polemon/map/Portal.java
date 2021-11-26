@@ -4,7 +4,7 @@ import com.unicamp.br.mc322.polemon.Player;
 import com.unicamp.br.mc322.polemon.Position;
 
 public class Portal implements Mappable {
-	Position posicao;
+	private Position posicao;
 	
 	@Override
 	public String getChar() {
