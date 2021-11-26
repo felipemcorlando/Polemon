@@ -24,17 +24,10 @@ public class Game {
 		this.movements = 0;
 	}
 
-<<<<<<< HEAD
-	private void loadPokemons(String path) {
-		this.wildPokemons = new Pokemon[Input.countLines(path)];
-		for (int i = 0; i < this.wildPokemons.length; i++)  
-			this.wildPokemons[i] = new Pokemon(Input.readLineFromFile(path, i));
-=======
 	private void loadMappables(int plans) {
 		this.plans = new ArrayList<Plan>(plans);
 		for (int i = 0; i < plans; i++)
 			this.plans.add(new Plan());
->>>>>>> branch 'main' of https://gitlab.com/f170926/polemon.git
 	}
 
 	public void printException(String error) {
@@ -82,7 +75,7 @@ public class Game {
 	}
 
 	private void updateGame(String command) {
-		if (!this.player.inCombat()) { //is in movement/action mode
+		if (!this.player.isInCombat()) { //is in movement/action mode
 			if (this.inMovementMode()) { 
 				Island island = this.getActualIsland();
 
@@ -118,7 +111,7 @@ public class Game {
 				default:
 					return;
 				}
-				Collectable newItem = this.player.collectItem();
+				Collectable newItem = this.player.collectItem(this.plans.get(this.player.getGlobalPosition().getZ()));
 				if (newItem != null)
 					System.out.println("Item collected: "+ newItem.toString());
 
@@ -147,73 +140,7 @@ public class Game {
 
 
 
-<<<<<<< HEAD
-			return ret;
-		}
-
-		private void drawBoard() {
-			Runtime.getRuntime().exec("cls");
-			Position playerPosition = this.player.getGlobalPosition();
-			System.out.println("Position: ("+playerPosition.getX()+","+playerPosition.getY()+")");
-
-			Island island = this.player.getActualIsland();
-
-			//create the island matrix representation
-			int size = island.getSize() + 2; //+2, the border
-			char[][] table = new char [size][size];
-			for (int i = 0; i < size; i++) 
-				for (int j = 0; j < size; j++) {
-					if (i == 0 || i == size-1 || j == 0 || j == size-1)
-						table[i][j] = '-'; //border
-					else
-						table[i][j] = '#';
-				}
-
-			int xOffset = island.getPosition().getX()-1;
-			int yOffset = island.getPosition().getY()-1.;
-
-			Pokemon[] p = island.getPokemons();
-			for (int i = 0; i < p.length; i++)
-				table[p[i].getPosition().getX()-xOffset][p[i].getPosition().getY()-yOffset] = 'P';
-
-			Collectable[] itens = island.getItens();
-			for (int i = 0; i < p.length; i++)
-				table[itens[i].getPosition().getX()-xOffset][itens[i].getPosition().getY()-yOffset] = 'I';
-
-			
-			
-			// alterar para Mappable  e para obter o char a ser printado -> mappable[index].getChar();
-			Bridge[] bridges = island.getBridges();
-			for (int i = 0; i < bridges.length; i++) 
-				table[bridges[i].getPlace1().getX()-xOffset][bridges[i].getPlace1().getY()-yOffset] = '=';
-
-			Portal[] portals = island.getPortals();
-			for (int i = 0; i < bridges.length; i++) 
-				table[portals[i].getPlace1().getX()-xOffset][portals[i].getPlace1().getY()-yOffset] = '0';
-
-			table[playerPosition.getX()-xOffset][playerPosition.getY()-yOffset] = 'O';
-
-			this.printMatrix(table);
-
-			System.out.println("Type of Island: "+island.getType());
-			System.out.println("---------------------------------------------");
-			System.out.println(this.player.getMinePokemons().toString());
-			System.out.println(this.player.getInventory().toString());
-			System.out.println("---------------------------------------------");
-
-			if (this.inMovementMode()) { //in action mode
-				System.out.println("Available actions:");
-				System.out.println("1-Activate a pokemon from pokemon bag");
-				System.out.println("2-Use item from inventory");
-				System.out.println("3-Attack a pokemon in the island");
-				System.out.println("4-Capture a pokemon");
-				System.out.println("5-End action mode. Roll dices");
-
-			} else 
-				System.out.println("Movements left: "+this.movements);
-=======
 		} else { //is in combat mode
->>>>>>> branch 'main' of https://gitlab.com/f170926/polemon.git
 
 		}
 	}
