@@ -1,7 +1,8 @@
 package com.unicamp.br.mc322.polemon;
 
 import java.util.ArrayList;
-import com.unicamp.br.mc322.polemon.habilities.IAbility;
+
+import com.unicamp.br.mc322.polemon.abilities.IAbility;
 
 public class Pokemon {
 	
