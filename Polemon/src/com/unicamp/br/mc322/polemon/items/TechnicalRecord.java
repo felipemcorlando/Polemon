@@ -14,7 +14,7 @@ public class TechnicalRecord implements Collectable {
 	public void useItem(Pokemon target) {
 		// TODO Auto-generated method stub
 		if(ability.canLearn(target)) {
-			target.teachAbility(ability, /*InputDoUsuario*/);
+			target.teachAbility(ability);
 		}
 		//O que faço se não der para aprender.
 	}
