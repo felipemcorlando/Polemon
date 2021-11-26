@@ -34,6 +34,7 @@ public class Island {
 		return this.size;
 	}
 	
+	
 	public ArrayList <Collectable> getItens() {
 		return this.itens;
 	}
@@ -44,6 +45,10 @@ public class Island {
 	
 	public Position getPosition() {
 		return position;
+	}
+
+	public ArrayList<Mappable> getMoveObjects() {
+		return moveObjects;
 	}
 	
 }
