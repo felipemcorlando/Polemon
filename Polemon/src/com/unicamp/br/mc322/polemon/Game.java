@@ -18,7 +18,7 @@ public class Game {
 
 	private void loadPokemons(String path) {
 		this.wildPokemons = new Pokemon[Input.countLines(path)];
-		for (int i = 0; i < this.wildPokemons.length; i++) 
+		for (int i = 0; i < this.wildPokemons.length; i++)  
 			this.wildPokemons[i] = new Pokemon(Input.readLineFromFile(path, i));
 	}
 
@@ -179,6 +179,9 @@ public class Game {
 			for (int i = 0; i < p.length; i++)
 				table[itens[i].getPosition().getX()-xOffset][itens[i].getPosition().getY()-yOffset] = 'I';
 
+			
+			
+			// alterar para Mappable  e para obter o char a ser printado -> mappable[index].getChar();
 			Bridge[] bridges = island.getBridges();
 			for (int i = 0; i < bridges.length; i++) 
 				table[bridges[i].getPlace1().getX()-xOffset][bridges[i].getPlace1().getY()-yOffset] = '=';

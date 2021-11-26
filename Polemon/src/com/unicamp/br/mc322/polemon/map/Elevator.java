@@ -1,5 +1,10 @@
 package com.unicamp.br.mc322.polemon.map;
 
-public abstract class Elevator implements Mappable {
+import com.unicamp.br.mc322.polemon.Position;
 
+public abstract class Elevator implements Mappable {
+	Position position;
+	public Elevator(Position newPosition) {
+		position=newPosition;
+	}
 }

@@ -1,13 +1,15 @@
 package com.unicamp.br.mc322.polemon.map;
 
 import com.unicamp.br.mc322.polemon.Player;
+import com.unicamp.br.mc322.polemon.Position;
 
 public class Portal implements Mappable {
-
+	Position posicao;
+	
 	@Override
-	public char getChar() {
+	public String getChar() {
 		// TODO Auto-generated method stub
-		return 0;
+		return "0";
 	}
 
 	@Override

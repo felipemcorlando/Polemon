@@ -11,7 +11,20 @@ public class Island {
 	Pokemon pokemons[];//vetor de pokemons da ilha
 	Collectable itens[];//vetor de itens presentes na ilha
 	int size;// tamanho da ilha 
-	Mappable moveObjects[];
+	Mappable moveObjects[];//Obbjetos de mudança de posição
+	
+	public Island(int newTier,int indexOnPlan,int sizeOfIslands) {
+		size=sizeOfIslands;
+		position = new Position((size*indexOnPlan)+(1*(indexOnPlan+1)),1,newTier);
+		itens = new Collectable[4];
+		moveObjects= new Mappable[3];
+		pokemons=new Pokemon[2];
+		
+		
+		
+	}
+	
+	
 	
 	public Position getPosition() {
 		return position;

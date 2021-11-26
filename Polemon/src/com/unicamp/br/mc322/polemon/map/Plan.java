@@ -5,6 +5,19 @@ import com.unicamp.br.mc322.polemon.Position;
 public class Plan {
 	Island islands [];
 	int tier ; // "andar" do plano
+	int sizeOfIslands;
+	
+	public Plan(int newTier,int newSizeOfIslands) {
+		tier=newTier;
+		sizeOfIslands=newSizeOfIslands;
+		islands = new Island[4];
+		int aux=0;
+		for(;aux<4;aux++) {
+			islands[aux]=new Island(newTier,aux,sizeOfIslands);
+		}
+		
+	}
+	
 	
 	
 	public Island findIsland(Position position) {
@@ -19,4 +32,5 @@ public class Plan {
 		return islands[index];
 		
 	}
+
 }

@@ -1,13 +1,19 @@
 package com.unicamp.br.mc322.polemon.map;
 
 import com.unicamp.br.mc322.polemon.Player;
+import com.unicamp.br.mc322.polemon.Position;
 
 public class UpElevator extends Elevator implements Mappable {
 
+	public UpElevator(Position newPosition) {
+		super(newPosition);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
-	public char getChar() {
+	public String getChar() {
 		// TODO Auto-generated method stub
-		return 0;
+		return"E";
 	}
 
 	@Override
