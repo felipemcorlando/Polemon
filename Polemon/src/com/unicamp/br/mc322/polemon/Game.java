@@ -209,21 +209,17 @@ public class Game {
 		int xOffset = (int) island.getPosition().getX()-1;
 		int yOffset = (int) (island.getPosition().getY()-1.);
 
-		ArrayList<Pokemon> p = island.getPokemons();
-		for (int i = 0; i < p.size(); i++)
-			table[p.get(i).getPosition().getX()-xOffset][p.get(i).getPosition().getY()-yOffset] = 'P';
+		ArrayList<Pokemon> pl = island.getPokemons();
+		for (Pokemon p : pl)
+			table[p.getPosition().getX()-xOffset][p.getPosition().getY()-yOffset] = 'P';
 
-		Collectable[] itens = island.getItens();
-		for (int i = 0; i < p.length; i++)
-			table[itens[i].getPosition().getX()-xOffset][itens[i].getPosition().getY()-yOffset] = 'I';
+		ArrayList<Collectable> itens = island.getItens();
+		for (Collectable item : itens)
+			table[item.getPosition().getX()-xOffset][item.getPosition().getY()-yOffset] = item.getChar();
 
-		Bridge[] bridges = island.getBridges();
-		for (int i = 0; i < bridges.length; i++) 
-			table[bridges[i].getPlace1().getX()-xOffset][bridges[i].getPlace1().getY()-yOffset] = '=';
-
-		Portal[] portals = island.getPortals();
-		for (int i = 0; i < bridges.length; i++) 
-			table[portals[i].getPlace1().getX()-xOffset][portals[i].getPlace1().getY()-yOffset] = '0';
+		ArrayList<Mappable> places = island.getMoveObjects();
+		for (Mappable map : places) 
+			table[map.getPosition().getX()-xOffset][map.getPosition().getY()-yOffset] = map.getChar();
 
 		table[playerPosition.getX()-xOffset][playerPosition.getY()-yOffset] = 'O';
 
