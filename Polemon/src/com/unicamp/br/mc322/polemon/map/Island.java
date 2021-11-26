@@ -30,7 +30,17 @@ public class Island {
 		
 	}
 	
+	public int getSize() {
+		return this.size;
+	}
 	
+	public ArrayList <Collectable> getItens() {
+		return this.itens;
+	}
+	
+	public void addPokemon(Pokemon p) {
+		this.pokemons.add(p);
+	}
 	
 	public Position getPosition() {
 		return position;
