@@ -26,11 +26,10 @@ public class Player {
 	public Collectable collectItem(Plan actualPlan) {
 		//checks if there is an item in the same position of player, if true collects
 		Island island = actualPlan.findIsland(this.globalPosition);
-		for (int i = 0; i < island.getCollectables().size(); i++) {
-			Collectable item = island.getCollectables().get(i);
+		for (Collectable item : island.getItens()){
 			if (this.globalPosition.equals(item.getPosition())) {
 				inventory.addItem(item);
-				island.getCollectables().remove(i);
+				island.getItens().remove(item);
 				return item;
 			}
 		}
