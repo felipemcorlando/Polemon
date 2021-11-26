@@ -1,5 +1,6 @@
 package com.unicamp.br.mc322.polemon;
 
+import java.util.ArrayList;
 import com.unicamp.br.mc322.polemon.habilities.IAbility;
 
 public class Pokemon {
@@ -10,13 +11,13 @@ public class Pokemon {
 	private int initialHp;
 	private int attackPoints; //Must be a initial value between 0 and 15;
 	private int defensePoints; //Must be a initial value between 0 and 15;
-	private IAbility[] abilities = new IAbility[4]; //The 4 initial standard abilities of the pokemon;
+	private ArrayList<IAbility> abilities = new ArrayList<IAbility>(); //The abilities list of the pokemon, there is no max index
 	private Position position; //Pokemon initial Position;
 	private int d; //Distância máxima de captura;
 	private int k; //Dificuldade da captura, vai de 2(mais dificil) a 8(mais facil).
 	
 	
-	public Pokemon(String name, Types type1, Types type2, int newHP, int newAttackPoints, int newDefensePoints,IAbility ab1, IAbility ab2, IAbility ab3, IAbility ab4, Position position) throws IllegalValueException{
+	public Pokemon(String name, Types type1, Types type2, int newHP, int newAttackPoints, int newDefensePoints,IAbility ab1, IAbility ab2, Position position) throws IllegalValueException{
 		//Set the name:
 		this.name = name;
 		//Set the pokemon type:
@@ -42,10 +43,8 @@ public class Pokemon {
 		}	
 		this.defensePoints = newDefensePoints;
 		//Set the pokemon standard abilities
-		this.abilities[0] = ab1;
-		this.abilities[1] = ab2;
-		this.abilities[2] = ab3;
-		this.abilities[3] = ab4;
+		this.abilities.add(ab1);
+		this.abilities.add(ab2);
 		//Set the pokemon initial position:
 		this.position = position;
 		//Set d:
@@ -54,12 +53,8 @@ public class Pokemon {
 		this.k = Dice.roll(4, 2);
 	}
 	
-	public void teachAbility(IAbility newAb, int abIndex) throws IndexOutOfBoundsException{ //abIndex is an integer from 1 to 4;
-		if(abIndex > 4 || abIndex < 1) {
-			abIndex = 1; 
-			throw new IndexOutOfBoundsException("Index must be a value between 1 and 4!");
-		}
-		this.abilities[abIndex-1] = newAb;
+	public void teachAbility(IAbility newAb) {
+		this.abilities.add(newAb);
 	}
 	
 	public Types[] getType() {
