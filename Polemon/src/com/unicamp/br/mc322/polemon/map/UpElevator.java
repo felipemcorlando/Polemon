@@ -23,7 +23,7 @@ public class UpElevator extends Elevator implements Mappable {
 			 System.out.println("Impossible movement");
 			 return;
 		 }
-		 player.changePosition(newPosition);
+		 player.setGlobalPosition(newPosition);
 	}
 
 }

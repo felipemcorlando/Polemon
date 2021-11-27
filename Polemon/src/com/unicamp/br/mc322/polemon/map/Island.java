@@ -15,10 +15,13 @@ public class Island {
 	private ArrayList <Collectable>  itens;//vetor de itens presentes na ilha
 	private int size;// tamanho da ilha 
 	private ArrayList<Mappable> moveObjects;//Obbjetos de mudança de posição
+	private int indexOnPlan;
 	
-	public Island(int newTier,int indexOnPlan,int sizeOfIslands) {
+	
+	public Island(int newTier,int newIndexOnPlan,int sizeOfIslands) {
+		this.indexOnPlan=newIndexOnPlan;
 		size=sizeOfIslands;
-		position = new Position((size*indexOnPlan)+(1*(indexOnPlan+1)),1,newTier);
+		position = new Position((size*newIndexOnPlan)+(1*(newIndexOnPlan+1)),1,newTier);
 		itens = new ArrayList<Collectable>();
 		moveObjects= new ArrayList<Mappable>();
 		pokemons=new ArrayList<Pokemon>();
@@ -27,11 +30,58 @@ public class Island {
 		int typeIndex=random.nextInt(5);
 		type= Types.values()[typeIndex];
 		
+		//metodos que adicionam elevadores 
+		if (newIndexOnPlan==0 && newTier!=0) {
+			this.addDownElevator();
+		}
+		if (newIndexOnPlan==3 && newTier!=3) {
+			this.addUpElevator();
+		}
+		
+		//metodos que adicionarão bridges;
+		if(newIndexOnPlan==0) {
+			this.addBridge(new Position((size+1),(size/2),newTier));
+		}
+		else if(newIndexOnPlan==3) {
+			this.addBridge(new Position(position.getX()-1,(size/2),newTier));
+		}
+		else{
+			this.addBridges(new Position(position.getX()+(size),(size/2),newTier),new Position(position.getX()-1,(size/2),newTier));
+		}
+		
+		//metodo para adicao de portal 
+		this.addPortal(new Position((position.getX()+(size/2)),(position.getY()+(size/2)),(position.getZ()+(size/2))));
 		
 	}
 	
 	public int getSize() {
 		return this.size;
+	}
+	
+	
+	private void addDownElevator() {
+		Mappable newDownElevator=new DownElevator(new Position(1,1,position.getZ()));
+		moveObjects.add(newDownElevator);
+	}
+	private void addUpElevator() {
+		Mappable newUpElevator=new UpElevator(new Position((size*4)+3,size,position.getZ()));
+		moveObjects.add(newUpElevator);
+	}
+	
+	private void addBridge(Position bridgePosition) {
+		Mappable newBridge= new Bridge(bridgePosition);
+		moveObjects.add(newBridge);
+	}
+	private void addBridges(Position bridgePosition1,Position bridgePosition2) {
+		Mappable newBridge1= new Bridge(bridgePosition1);
+		moveObjects.add(newBridge1);
+		Mappable newBridge2= new Bridge(bridgePosition2);
+		moveObjects.add(newBridge2);
+	}
+	
+	private void addPortal(Position portalPosition) {
+		Mappable newPortal= new Portal(portalPosition);
+		moveObjects.add(newPortal);
 	}
 	
 	

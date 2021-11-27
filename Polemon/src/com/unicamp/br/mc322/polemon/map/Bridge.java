@@ -4,8 +4,13 @@ import com.unicamp.br.mc322.polemon.Player;
 import com.unicamp.br.mc322.polemon.Position;
 
 public class Bridge implements Mappable {
-	private Position posicao;
-	@Override
+	private Position position;
+	
+	
+	public Bridge (Position newPosition) {
+		position=newPosition;
+	}
+	
 	public String getChar() {
 		// TODO Auto-generated method stub
 		return "=";
