@@ -2,7 +2,6 @@ package com.unicamp.br.mc322.polemon.map;
 
 import java.util.ArrayList;
 
-import com.unicamp.br.mc322.polemon.Input;
 import com.unicamp.br.mc322.polemon.Player;
 import com.unicamp.br.mc322.polemon.Pokemon;
 import com.unicamp.br.mc322.polemon.Position;
@@ -34,12 +33,7 @@ public class Portal implements Mappable {
 			aux.getLowInfo();
 			System.out.println("Press "+visitedIslands.indexOf(aux));
 		}
-		// adicionar try , catch
-		int comand = Integer.parseInt(Input.readKeyboard());
-		Island selectedIsland = visitedIslands.get(comand);
-		
-		
-		//set actual island
+		// adicionar aqui o leitor do comando 
 	}
 
 
