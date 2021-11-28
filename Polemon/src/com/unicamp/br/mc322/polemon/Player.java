@@ -15,6 +15,7 @@ public class Player {
 	private ArrayList<Island> visitedIslands;
 	private boolean inCombat;
 	
+	
 	public Player() {
 		this.globalPosition = new Position(1, 1, 0);
 	}

@@ -36,6 +36,7 @@ public class Island {
 		}
 		if (newIndexOnPlan==3 && newTier!=3) {
 			this.addUpElevator();
+			this.addPortal(new Position((position.getX()+(size/2)),(position.getY()+(size/2)),(position.getZ()+(size/2))));//metodo para adicao de portal na ultima ilha do plano
 		}
 		
 		//metodos que adicionarão bridges;
@@ -49,8 +50,8 @@ public class Island {
 			this.addBridges(new Position(position.getX()+(size),(size/2),newTier),new Position(position.getX()-1,(size/2),newTier));
 		}
 		
-		//metodo para adicao de portal 
-		this.addPortal(new Position((position.getX()+(size/2)),(position.getY()+(size/2)),(position.getZ()+(size/2))));
+		 
+		
 		
 	}
 	
