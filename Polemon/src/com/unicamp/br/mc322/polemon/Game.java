@@ -271,6 +271,7 @@ public class Game {
 		} else 
 			System.out.println("Movements left: "+this.movements);
 
+		System.out.print("Enter a command: ");
 	}
 
 	private void printMatrix(char[][] matrix) {
