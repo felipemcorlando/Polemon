@@ -16,6 +16,10 @@ public class Inventory {
 		this.itemsList.remove(item);
 	}
 	
+	public ArrayList<Collectable> getItemsList () {
+		return this.itemsList;
+	}
+	
 	public Collectable getItem(String name) {
 		Collectable item = null;
 		for(Collectable i : this.itemsList) {
