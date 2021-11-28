@@ -23,7 +23,6 @@ public class Bridge implements Mappable {
 		if (playerPosition.getX()<position.getX()) {//jogador deve se movimentar para a direita
 			
 		}
-		//set actual island
 	}
 
 	@Override
