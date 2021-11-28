@@ -20,7 +20,7 @@ public class Game {
 		this.exitSelected = false;
 		this.player = new Player( );
 		this.loadMappables(4);
-		this.loadPokemons("WildPokemons.txt");
+		this.loadPokemons("C:\\Users\\wyatt\\git\\polemon\\Polemon\\src\\com\\unicamp\\br\\mc322\\polemon\\PokemonInstancesInfo.txt");
 		this.movements = 0;
 	}
 
@@ -71,12 +71,24 @@ public class Game {
 		return !(this.movements == 0);
 	}
 
-	private void cleanScreen() {
-		try {
-			Runtime.getRuntime().exec("cls");
-		} catch (IOException e) {
-			this.printException(e.getMessage());
-		}
+	private final static void cleanScreen() {
+		try
+	    {
+	        final String os = System.getProperty("os.name");
+
+	        if (os.contains("Windows"))
+	        {
+	            Runtime.getRuntime().exec("cls");
+	        }
+	        else
+	        {
+	            Runtime.getRuntime().exec("clear");
+	        }
+	    }
+	    catch (final Exception e)
+	    {
+	        System.out.println("Erro no cleanScreen:" + e.getMessage());
+	    }
 	}
 
 	private void updateGame(String command) {
@@ -126,7 +138,7 @@ public class Game {
 					this.choosePokemon();
 					break;
 				case "2":
-					this.useItem();
+					//this.useItem();
 					break;
 				case "3":
 
@@ -151,35 +163,46 @@ public class Game {
 	}
 
 	private void choosePokemon() {
-		this.cleanScreen();
+		cleanScreen();
 		System.out.println("Choose one pokemon:");
 		ArrayList<Pokemon> pb = this.player.getMinePokemons().getPokemonList();
 		for (int i = 0; i < pb.size(); i++) 
 			System.out.println((i+1)+" - "+pb.get(i));
 
-		String str = Input.readKeyboard();
-		if (str == "")
-			return;
+		try {
+			String str = Input.readKeyboard();
+			if (str == "")
+				return;
 
-		int choice = Integer.parseInt(str);
-		this.player.choosePokemon(choice-1);
+			int choice = Integer.parseInt(str);
+			this.player.choosePokemon(choice-1);
+
+		} catch (Exception e) {
+			printException(e.getMessage());
+		}
 	}
-
+	/*
 	private void useItem() {
-		this.cleanScreen();
+		cleanScreen();
 		System.out.println("Select one item to use:");
 		Iventory inv = this.player.getInventory();
 		for (int i = 0; i < inv.itens.length; i++) 
 			System.out.println((i+1)+" - "+inv.itens[i]);
 
-		String str = Input.readKeyboard();
-		if (str == "")
-			return;
+		try {
+			String str = Input.readKeyboard();
+			if (str == "")
+				return;
 
-		int choice = Integer.parseInt(str);
-		this.player.useItem(inv.itens[choice-1]);
+			int choice = Integer.parseInt(str);
+			this.player.useItem(inv.itens[choice-1]);
+
+		} catch (Exception e) {
+			printException(e.getMessage());
+		}
+
 	}
-
+	 */
 	private String readInput() {
 		String ret = Input.readKeyboard();
 		if (ret.toLowerCase() == "quit")
@@ -189,7 +212,7 @@ public class Game {
 	}
 
 	private void drawBoard() {
-		this.cleanScreen();
+		cleanScreen();
 		Position playerPosition = this.player.getGlobalPosition();
 		System.out.println("Position: ("+playerPosition.getX()+","+playerPosition.getY()+")");
 
@@ -215,11 +238,11 @@ public class Game {
 
 		ArrayList<Collectable> itens = island.getItens();
 		for (Collectable item : itens)
-			table[item.getPosition().getX()-xOffset][item.getPosition().getY()-yOffset] = item.getChar();
+			table[item.getPosition().getX()-xOffset][item.getPosition().getY()-yOffset] = 'I'; //item.getChar();
 
 		ArrayList<Mappable> places = island.getMoveObjects();
 		for (Mappable map : places) 
-			table[map.getPosition().getX()-xOffset][map.getPosition().getY()-yOffset] = map.getChar();
+			table[map.getPosition().getX()-xOffset][map.getPosition().getY()-yOffset] = 'M';// map.getChar();
 
 		table[playerPosition.getX()-xOffset][playerPosition.getY()-yOffset] = 'O';
 
@@ -247,7 +270,7 @@ public class Game {
 	private void printMatrix(char[][] matrix) {
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[i].length; j++) {
-				System.out.print(matrix[i][j]);
+				System.out.print(matrix[i][j]+" ");
 			}
 			System.out.println();
 		} 
