@@ -24,6 +24,8 @@ public class DownElevator extends Elevator implements Mappable {
 			 return;
 		 }
 		 player.setGlobalPosition(newPosition);
+		 //set actual island 
+		 
 	}
 
 	@Override
