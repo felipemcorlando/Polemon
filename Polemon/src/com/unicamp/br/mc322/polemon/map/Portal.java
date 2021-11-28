@@ -37,7 +37,7 @@ public class Portal implements Mappable {
 		// adicionar try , catch
 		int comand = Integer.parseInt(Input.readKeyboard());
 		Island selectedIsland = visitedIslands.get(comand);
-		
+		//ansdijas
 		
 		//set actual island
 	}
