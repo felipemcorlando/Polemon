@@ -18,8 +18,14 @@ public class Game {
 
 	public Game() {
 		this.exitSelected = false;
-		this.player = new Player( );
 		this.loadMappables(4);
+		
+		//creating the Player
+		Pokemon p1 = new Pokemon(Input.readLineFromFile("C:\\Users\\wyatt\\git\\polemon\\Polemon\\src\\com\\unicamp\\br\\mc322\\polemon\\firstPokemon.txt", 0));
+		Position initialPos = new Position(1,1,0);
+		Island i1 = this.getIslandByPosition(initialPos);
+		
+		this.player = new Player(initialPos, p1, i1);
 		this.loadPokemons("C:\\Users\\wyatt\\git\\polemon\\Polemon\\src\\com\\unicamp\\br\\mc322\\polemon\\PokemonInstancesInfo.txt");
 		this.movements = 0;
 	}
@@ -181,13 +187,13 @@ public class Game {
 			printException(e.getMessage());
 		}
 	}
-	/*
+	
 	private void useItem() {
 		cleanScreen();
 		System.out.println("Select one item to use:");
-		Iventory inv = this.player.getInventory();
-		for (int i = 0; i < inv.itens.length; i++) 
-			System.out.println((i+1)+" - "+inv.itens[i]);
+		ArrayList<Collectable> inv = this.player.getInventory().getItemsList();
+		for (int i = 0; i < inv.size(); i++) 
+			System.out.println((i+1)+" - "+inv.get(i));
 
 		try {
 			String str = Input.readKeyboard();
@@ -195,14 +201,14 @@ public class Game {
 				return;
 
 			int choice = Integer.parseInt(str);
-			this.player.useItem(inv.itens[choice-1]);
+			this.player.useItem(inv.get(choice-1));
 
 		} catch (Exception e) {
 			printException(e.getMessage());
 		}
 
 	}
-	 */
+	
 	private String readInput() {
 		String ret = Input.readKeyboard();
 		if (ret.toLowerCase() == "quit")
@@ -270,7 +276,7 @@ public class Game {
 	private void printMatrix(char[][] matrix) {
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[i].length; j++) {
-				System.out.print(matrix[i][j]+" ");
+				System.out.print(matrix[j][i]+" ");
 			}
 			System.out.println();
 		} 
