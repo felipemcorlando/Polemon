@@ -101,4 +101,17 @@ public class Island {
 		return moveObjects;
 	}
 	
+	public ArrayList<Pokemon> getPokemons(){
+		return pokemons;
+	}
+
+	public String getType() {
+		// TODO Auto-generated method stub
+		return type.name();
+	}
+	
+	public void getLowInfo() {
+		System.out.println("Island "+indexOnPlan+" from plan "+position.getZ()+"\t type : "+type.name() );
+		return;
+	}
 }

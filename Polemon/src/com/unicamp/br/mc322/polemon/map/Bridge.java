@@ -19,7 +19,16 @@ public class Bridge implements Mappable {
 	@Override
 	public void movePlayer(Player player) {
 		// TODO Auto-generated method stub
+		Position playerPosition = player.getGlobalPosition();
+		if (playerPosition.getX()<position.getX()) {//jogador deve se movimentar para a direita
+			
+		}
+	}
 
+	@Override
+	public Position getPosition() {
+		// TODO Auto-generated method stub
+		return position;
 	}
 
 }

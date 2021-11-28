@@ -26,4 +26,10 @@ public class DownElevator extends Elevator implements Mappable {
 		 player.setGlobalPosition(newPosition);
 	}
 
+	@Override
+	public Position getPosition() {
+		// TODO Auto-generated method stub
+		return super.position;
+	}
+
 }

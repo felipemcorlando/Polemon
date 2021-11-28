@@ -18,12 +18,18 @@ public class UpElevator extends Elevator implements Mappable {
 
 	@Override
 	public void movePlayer(Player player) {
-		 Position newPosition = new Position (player.getGlobalPosition().getX(),player.getGlobalPosition().getY() ,player.getGlobalPosition().getZ()+1);
+		 Position newPosition = new Position (1,1 ,player.getGlobalPosition().getZ()+1);
 		 if (newPosition.getZ()>3) {
 			 System.out.println("Impossible movement");
 			 return;
 		 }
 		 player.setGlobalPosition(newPosition);
+	}
+
+	@Override
+	public Position getPosition() {
+		// TODO Auto-generated method stub
+		return position;
 	}
 
 }

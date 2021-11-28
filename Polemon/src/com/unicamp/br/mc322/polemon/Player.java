@@ -65,5 +65,8 @@ public class Player {
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
+	public ArrayList<Island> getVisitedIslands(){
+		return visitedIslands;
+	}
 	
 }
