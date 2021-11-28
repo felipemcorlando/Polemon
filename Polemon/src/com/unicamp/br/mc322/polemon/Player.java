@@ -10,11 +10,27 @@ public class Player {
 	private Position globalPosition;
 	private Pokemon activatedPokemon;
 	
+	private Island actualIsland;
+	
 	private PokemonBag minePokemons;	
 	private Inventory inventory;
 	private ArrayList<Island> visitedIslands;
 	private boolean inCombat;
 	
+	public Player(Position initialPos, Pokemon starter, Island initialIsland) {
+		this.globalPosition = initialPos;
+		this.minePokemons = new PokemonBag();
+		this.minePokemons.addItem(starter);
+		this.activatedPokemon = this.minePokemons.getPokemonList().get(0);
+		
+		this.inventory = new Inventory();
+		
+		this.visitedIslands = new ArrayList<Island>();
+		this.visitedIslands.add(initialIsland);
+		this.actualIsland = initialIsland;
+		
+		this.inCombat = false;
+	}
 	
 	public Player() {
 		this.globalPosition = new Position(1, 1, 0);
@@ -47,6 +63,8 @@ public class Player {
 		return true;
 	}
 	
+	public void useItem(Collectable item) {}
+	
 	public Position getGlobalPosition() {
 		return globalPosition;
 	}
@@ -56,18 +74,34 @@ public class Player {
 	}
 
 	public PokemonBag getMinePokemons() {
-		return minePokemons;
+		return this.minePokemons;
 	}
 
 	public Inventory getInventory() {
-		return inventory;
+		return this.inventory;
 	}
 
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
 	public ArrayList<Island> getVisitedIslands(){
-		return visitedIslands;
+		return this.visitedIslands;
+	}
+
+	public Island getActualIsland() {
+		return actualIsland;
+	}
+
+	public void setActualIsland(Island actualIsland) {
+		this.actualIsland = actualIsland;
+	}
+
+	public Pokemon getActivatedPokemon() {
+		return activatedPokemon;
+	}
+
+	public void setActivatedPokemon(Pokemon activatedPokemon) {
+		this.activatedPokemon = activatedPokemon;
 	}
 	
 }
