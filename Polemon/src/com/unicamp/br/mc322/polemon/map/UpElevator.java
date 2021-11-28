@@ -25,6 +25,7 @@ public class UpElevator extends Elevator implements Mappable {
 		 }
 		 player.setGlobalPosition(newPosition);
 		 //set actual island
+		 //ajksndaj
 	}
 
 	@Override
