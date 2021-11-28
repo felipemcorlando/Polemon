@@ -42,6 +42,50 @@ public class Pokemon {
 		this.k = Dice.roll(4, 2);
 	}
 	
+	public Pokemon (String register) {
+		String[] p = register.split(" ");
+		this.name = p[0];
+		
+		this.type[0] = this.getType(p[1]);
+		this.type[1] = this.getType(p[2]);
+
+		this.hp = Integer.parseInt(p[3]);
+		this.initialHp = Integer.parseInt(p[4]);
+
+		this.attackPoints = Integer.parseInt(p[5]);
+
+		this.defensePoints = Integer.parseInt(p[6]);
+
+		//this.abilities.add(p[7]);
+		//this.abilities.add(p[8]);
+
+		this.position = new Position(Integer.parseInt(p[9]), Integer.parseInt(p[10]), Integer.parseInt(p[11]));
+
+		this.d = Dice.roll(4, 1);
+
+		this.k = Dice.roll(4, 2);
+		
+	}
+	
+	public Types getType(String index) {
+		switch(index) {
+		case "Types.FIRE":
+			return Types.FIRE;
+		case "Types.GRASS":
+			return Types.GRASS;
+		case "Types.WATER":
+			return Types.WATER;
+		case "Types.ELECTRIC":
+			return Types.ELECTRIC;
+		case "Types.PSYCHIC":
+			return Types.PSYCHIC;
+		case "Types.DRAGON":
+			return Types.DRAGON;
+		default:
+			return null;
+		}
+	}
+	
 	public void teachAbility(IAbility newAb) {
 		this.abilities.add(newAb);
 	}
