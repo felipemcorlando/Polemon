@@ -87,7 +87,20 @@ public class Pokemon {
 	}
 	
 	public void teachAbility(IAbility newAb) {
+		if(this.findAbility(newAb.getName()) == false)
 		this.abilities.add(newAb);
+		else {
+			//Não foi possivel add newAb;
+		}
+	}
+	
+	public boolean findAbility(String name) {
+		for(IAbility a : this.abilities) {
+			if(a.getName() == name) {
+				return true; //Habilidade encontrada;
+			}
+		}
+		return false; //Habilidade não encontrada;
 	}
 	
 	public Types[] getType() {
