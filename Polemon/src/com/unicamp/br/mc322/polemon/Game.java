@@ -56,7 +56,7 @@ public class Game {
 		this.movements =  Dice.roll(6, 2);
 		System.out.println("Game started!");
 
-		while(!exitSelected) {
+		while(!this.exitSelected) {
 			this.drawBoard();
 			String command = this.readInput();
 			this.updateGame(command);
@@ -64,9 +64,11 @@ public class Game {
 		System.out.println("Game terminated. Bye!");
 
 	}
-
+	
 	private Island getPlayerActualIsland() {
-		return this.plans.get(this.player.getGlobalPosition().getZ()).findIsland(this.player.getGlobalPosition());
+		//Updating because it is good to 
+		this.player.setActualIsland(this.plans.get(this.player.getGlobalPosition().getZ()).findIsland(this.player.getGlobalPosition()));
+		return this.player.getActualIsland();
 	}
 
 	private Island getIslandByPosition(Position pos) {
@@ -78,58 +80,75 @@ public class Game {
 	}
 
 	private final static void cleanScreen() {
-		try
-	    {
-	        final String os = System.getProperty("os.name");
-
-	        if (os.contains("Windows"))
-	        {
-	            Runtime.getRuntime().exec("cls");
-	        }
-	        else
-	        {
-	            Runtime.getRuntime().exec("clear");
-	        }
-	    }
-	    catch (final Exception e)
-	    {
-	        System.out.println("Erro no cleanScreen:" + e.getMessage());
-	    }
+		//Jumps 20 lines to 'clear' console
+		for (int i = 0; i < 20; ++i) System.out.println();
 	}
 
+	private boolean canMove(Position target) {
+		Island i = this.getIslandByPosition(target);
+		if (i == null) { //maybe there is a bridge in the border
+			i = this.getPlayerActualIsland();
+			ArrayList<Mappable> map = i.getMoveObjects();
+			for (Mappable m : map)
+				if (m.getPosition().equals(target)) //there is a bridge in border
+					return true;
+			
+			return false;
+		} else return true; 
+	}
+	
+	private void useMappable () {
+		//checks if there is a Mappable in the same position of player
+		Island i = this.getPlayerActualIsland();
+		ArrayList<Mappable> map = i.getMoveObjects();
+		for (Mappable m : map) {
+			if (m.getPosition().equals(this.player.getGlobalPosition())) {
+				
+				m.movePlayer(this.player);
+				this.getPlayerActualIsland(); //updates the actual island
+				
+				return;
+			}
+		}
+	}
+	
 	private void updateGame(String command) {
 		if (!this.player.isInCombat()) { //is in movement/action mode
 			if (this.inMovementMode()) { 
 				Island island = this.getPlayerActualIsland();
-
+				Position actual = this.player.getGlobalPosition();
 				switch(command) {
 				case "w":
-					if (this.player.getGlobalPosition().getY() - 1 < island.getPosition().getY())
+					if (!this.canMove(new Position(actual.getX(), actual.getY()-1, actual.getZ())))
 						return;
 
 					this.player.getGlobalPosition().travel(0, -1, 0);
 					this.movements--;
+					this.useMappable();
 					break;
 				case "s":
-					if (this.player.getGlobalPosition().getY() + 1 > island.getPosition().getY()+island.getSize())
-						return;
+					if (!this.canMove(new Position(actual.getX(), actual.getY()+1, actual.getZ())))
+							return;
 
 					this.player.getGlobalPosition().travel(0, 1, 0);
 					this.movements--;
+					this.useMappable();		
 					break;
 				case "a":
-					if (this.player.getGlobalPosition().getX() - 1 < island.getPosition().getX())
-						return;
+					if (!this.canMove(new Position(actual.getX()-1, actual.getY(), actual.getZ())))
+							return;
 
 					this.player.getGlobalPosition().travel(-1, 0, 0);
 					this.movements--;
+					this.useMappable();
 					break;
 				case "d":
-					if (this.player.getGlobalPosition().getX() + 1 > island.getPosition().getX())
-						return;
+					if (!this.canMove(new Position(actual.getX()+1, actual.getY(), actual.getZ())))
+							return;
 
 					this.player.getGlobalPosition().travel(1, 0, 0);
 					this.movements--;
+					this.useMappable();
 					break;
 				default:
 					return;
@@ -144,7 +163,7 @@ public class Game {
 					this.choosePokemon();
 					break;
 				case "2":
-					//this.useItem();
+					this.useItem();
 					break;
 				case "3":
 
@@ -238,6 +257,7 @@ public class Game {
 		int xOffset = (int) island.getPosition().getX()-1;
 		int yOffset = (int) (island.getPosition().getY()-1.);
 
+		//printar o pokemon soh se estiver dentro do range de captura
 		ArrayList<Pokemon> pl = island.getPokemons();
 		for (Pokemon p : pl)
 			table[p.getPosition().getX()-xOffset][p.getPosition().getY()-yOffset] = 'P';
@@ -256,8 +276,8 @@ public class Game {
 
 		System.out.println("Type of Island: "+island.getType());
 		System.out.println("---------------------------------------------");
-		System.out.println(this.player.getMinePokemons().toString());
-		System.out.println(this.player.getInventory().toString());
+		System.out.println("Pokemon bag: "+this.player.getMinePokemons().toString());
+		System.out.println("Inventory: "+this.player.getInventory().toString());
 		System.out.println("---------------------------------------------");
 
 		if (!this.inMovementMode()) { //in action mode

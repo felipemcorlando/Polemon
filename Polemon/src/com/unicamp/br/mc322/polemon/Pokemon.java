@@ -7,7 +7,7 @@ import com.unicamp.br.mc322.polemon.abilities.IAbility;
 public class Pokemon {
 	
 	private String name;
-	private Types[] type = new Types[2];
+	private ArrayList<Types> type = new ArrayList<Types>(2);
 	private double hp; //Must be a positive value;
 	private int initialHp;
 	private int attackPoints; //Must be a positive value;
@@ -22,8 +22,10 @@ public class Pokemon {
 		//Set the name:
 		this.name = name;
 		//Set the pokemon type:
-		this.type[0] = type1;
-		this.type[1] = type2;
+		this.type.add(type1);
+		if(type2 != null) {
+			this.type.add(type2);
+		}
 		//Set the pokemon HP:
 		this.hp = newHP;
 		this.initialHp = newHP;
@@ -46,8 +48,8 @@ public class Pokemon {
 		String[] p = register.split(" ");
 		this.name = p[0];
 		
-		this.type[0] = this.getType(p[1]);
-		this.type[1] = this.getType(p[2]);
+		this.type.add(this.getType(p[1]));
+		this.type.add(this.getType(p[2]));
 
 		this.hp = Integer.parseInt(p[3]);
 		this.initialHp = Integer.parseInt(p[4]);
@@ -103,7 +105,7 @@ public class Pokemon {
 		return false; //Habilidade não encontrada;
 	}
 	
-	public Types[] getType() {
+	public ArrayList<Types> getPokemonType() {
 		return type;
 	}
 

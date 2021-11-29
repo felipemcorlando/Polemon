@@ -18,23 +18,15 @@ public class Plan {
 		for(;aux<4;aux++) {
 			islands.add(new Island(newTier,aux,sizeOfIslands));
 		}
-		
-		
 	}
-	
-	
 	
 	public Island findIsland(Position position) {
 		if((position.getY()%(sizeOfIslands+1)==0) ||position.getY()==0 ||position.getX()==0||position.getX()==(sizeOfIslands+1)) {
-			System.out.println("No island in this position");
+			//System.out.println("No island in this position");
 			return null;
 		}
 		
-		int posY=position.getY();
-		int index= posY/(sizeOfIslands+1);
-		
-		return islands.get(index);
-		
+		int index = position.getX()/(this.sizeOfIslands+1);
+		return this.islands.get(index);
 	}
-
 }

@@ -49,4 +49,12 @@ public class Position {
 		return this;
 	}
 	
+	public boolean equals(int x, int y, int z) {
+		return (this.x == x && this.y == y && this.z == z);
+	}
+	
+	public boolean equals(Position o) {
+		return (this.x == o.x && this.y == o.y && this.z == o.z);
+	}
+	
 }
