@@ -10,7 +10,7 @@ public final class Input {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try{
 			String ret = br.readLine();
-			br.close();
+			
 			return ret;
 		}
 		catch(Exception e){
