@@ -13,9 +13,9 @@ public class DownElevator extends Elevator implements Mappable {
 	}
 
 	@Override
-	public String getChar() {
+	public char getChar() {
 		
-		return "E";
+		return 'E';
 	}
 
 	@Override

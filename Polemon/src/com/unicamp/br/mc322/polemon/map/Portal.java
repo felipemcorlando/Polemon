@@ -16,9 +16,9 @@ public class Portal implements Mappable {
 	
 	
 	@Override
-	public String getChar() {
+	public char getChar() {
 		// TODO Auto-generated method stub
-		return "0";
+		return '0';
 	}
 
 	@Override

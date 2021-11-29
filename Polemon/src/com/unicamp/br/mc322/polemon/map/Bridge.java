@@ -13,9 +13,9 @@ public class Bridge implements Mappable {
 		position=newPosition;
 	}
 	
-	public String getChar() {
+	public char getChar() {
 		// TODO Auto-generated method stub
-		return "=";
+		return '=';
 	}
 
 	@Override

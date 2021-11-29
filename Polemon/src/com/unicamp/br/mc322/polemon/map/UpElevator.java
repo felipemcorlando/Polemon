@@ -13,9 +13,9 @@ public class UpElevator extends Elevator implements Mappable {
 	}
 
 	@Override
-	public String getChar() {
+	public char getChar() {
 		// TODO Auto-generated method stub
-		return"E";
+		return 'E' ;
 	}
 
 	@Override
