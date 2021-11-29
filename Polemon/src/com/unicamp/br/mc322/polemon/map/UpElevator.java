@@ -1,5 +1,7 @@
 package com.unicamp.br.mc322.polemon.map;
 
+import java.util.ArrayList;
+
 import com.unicamp.br.mc322.polemon.Player;
 import com.unicamp.br.mc322.polemon.Position;
 
@@ -25,7 +27,6 @@ public class UpElevator extends Elevator implements Mappable {
 		 }
 		 player.setGlobalPosition(newPosition);
 		 //set actual island
-		 //ajksndaj
 	}
 
 	@Override
