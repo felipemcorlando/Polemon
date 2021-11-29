@@ -1,5 +1,7 @@
 package com.unicamp.br.mc322.polemon.map;
 
+import java.util.ArrayList;
+
 import com.unicamp.br.mc322.polemon.Player;
 import com.unicamp.br.mc322.polemon.Position;
 
@@ -18,7 +20,7 @@ public class DownElevator extends Elevator implements Mappable {
 
 	@Override
 	public void movePlayer(Player player) {
-		 Position newPosition = new Position (player.getGlobalPosition().getX(),player.getGlobalPosition().getY() ,player.getGlobalPosition().getZ()-1);
+		 Position newPosition = new Position (1,1 ,player.getGlobalPosition().getZ()-1);
 		 if (newPosition.getZ()<0) {
 			 System.out.println("Impossible movement");
 			 return;
