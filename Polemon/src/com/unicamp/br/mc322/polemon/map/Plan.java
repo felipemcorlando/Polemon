@@ -18,7 +18,7 @@ public class Plan {
 		for(;aux<4;aux++) {
 			islands.add(new Island(newTier,aux,sizeOfIslands));
 		}
-		// adicionar aqui os elevadores e pontes . com metodos nas ilhas addUpElevator , addDownElevator , addBridge ;
+		
 		
 	}
 	
