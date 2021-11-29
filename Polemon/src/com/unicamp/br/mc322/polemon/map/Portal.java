@@ -35,11 +35,13 @@ public class Portal implements Mappable {
 			System.out.println("Press "+visitedIslands.indexOf(aux));
 		}
 		// adicionar try , catch
+		
 		int comand = Integer.parseInt(Input.readKeyboard());
 		Island selectedIsland = visitedIslands.get(comand);
-		//ansdijas
 		
-		//set actual island
+		player.setGlobalPosition(selectedIsland.getPosition());
+		
+		
 	}
 
 
