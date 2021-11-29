@@ -1,5 +1,7 @@
 package com.unicamp.br.mc322.polemon.map;
 
+import java.util.ArrayList;
+
 import com.unicamp.br.mc322.polemon.Player;
 import com.unicamp.br.mc322.polemon.Position;
 
@@ -20,10 +22,14 @@ public class Bridge implements Mappable {
 	public void movePlayer(Player player) {
 		// TODO Auto-generated method stub
 		Position playerPosition = player.getGlobalPosition();
-		if (playerPosition.getX()<position.getX()) {//jogador deve se movimentar para a direita
-			
+		Island actualIsland=player.getActualIsland();
+		if (actualIsland.getPosition().getX()<position.getX()) {
+			player.setGlobalPosition(playerPosition.travel((new Position(1,0,0))));
 		}
-		//set actual island
+		else {
+			player.setGlobalPosition(playerPosition.travel((new Position(-1,0,0))));
+		}
+		
 	}
 
 	@Override
