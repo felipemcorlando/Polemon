@@ -1,0 +1,1 @@
+package com.unicamp.br.mc322.polemon.abilities.passive;
