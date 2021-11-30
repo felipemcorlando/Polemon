@@ -19,7 +19,7 @@ public class Absorb implements IActiveAbility {
 	}
 	
 	@Override
-	public void useHability(Pokemon attacker, Pokemon defender) {
+	public void useHability(Pokemon self, Pokemon opponent) {
 		// TODO Auto-generated method stub
 		double damageDealt = 0;
 		Random rand = new Random();
@@ -30,8 +30,8 @@ public class Absorb implements IActiveAbility {
 				//Algum feedback caso acertou critcial hit?
 				extraDamage = 1.5;
 			damageDealt = extraDamage*this.damage;
-			defender.setHp(defender.getHp()-damageDealt);
-			attacker.setHp(attacker.getHp()+damageDealt/2);
+			opponent.setHp(opponent.getHp()-damageDealt);
+			self.setHp(self.getHp()+damageDealt/2);
 		}
 	}
 

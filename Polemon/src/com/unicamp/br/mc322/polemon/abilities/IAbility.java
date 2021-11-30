@@ -4,7 +4,7 @@ import com.unicamp.br.mc322.polemon.Pokemon;
 
 public interface IAbility {
 
-	public void useHability(Pokemon attacker, Pokemon defender);
+	public void useHability(Pokemon self, Pokemon opponent);
 	
 	public boolean canLearn(Pokemon learner);
 	

@@ -22,7 +22,7 @@ public class FirePunch implements IActiveAbility {
 	}
 	
 	@Override
-	public void useHability(Pokemon attacker, Pokemon defender) {
+	public void useHability(Pokemon self, Pokemon opponent) {
 		// TODO Auto-generated method stub
 		double damageDealt = 0;
 		Random rand = new Random();
@@ -33,7 +33,7 @@ public class FirePunch implements IActiveAbility {
 				//Algum feedback caso acertou critcial hit?
 				extraDamage = 1.5;
 			damageDealt = extraDamage*this.damage;
-			defender.setHp(defender.getHp()-damageDealt);
+			opponent.setHp(opponent.getHp()-damageDealt);
 		}
 	}
 
