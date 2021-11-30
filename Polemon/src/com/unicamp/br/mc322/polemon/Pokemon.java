@@ -3,6 +3,8 @@ package com.unicamp.br.mc322.polemon;
 import java.util.ArrayList;
 
 import com.unicamp.br.mc322.polemon.abilities.IAbility;
+import com.unicamp.br.mc322.polemon.abilities.active.IActiveAbility;
+import com.unicamp.br.mc322.polemon.abilities.passive.IPassiveAbility;
 
 public class Pokemon {
 	
@@ -12,13 +14,14 @@ public class Pokemon {
 	private int initialHp;
 	private int attackPoints; //Must be a positive value;
 	private int defensePoints; //Must be a positive value;
-	private ArrayList<IAbility> abilities = new ArrayList<IAbility>(); //The abilities list of the pokemon, there is no max index
+	private ArrayList<IAbility> activeAbilities = new ArrayList<IAbility>(); //The Active Abilities list of the pokemon, there is no max index
+	private ArrayList<IAbility> passiveAbilities = new ArrayList<IAbility>(); //The Passive Abilities list of the pokemon, there is no max index
 	private Position position; //Pokemon initial Position;
 	private int d; //Distância máxima de captura;
 	private int k; //Dificuldade da captura, vai de 2(mais dificil) a 8(mais facil).
 	
 	
-	public Pokemon(String name, Types type1, Types type2, int newHP, int newAttackPoints, int newDefensePoints,IAbility ab1, IAbility ab2, Position position) throws IllegalValueException{
+	public Pokemon(String name, Types type1, Types type2, int newHP, int newAttackPoints, int newDefensePoints,IPassiveAbility ab1, IActiveAbility ab2, Position position) throws IllegalValueException{
 		//Set the name:
 		this.name = name;
 		//Set the pokemon type:
@@ -34,8 +37,8 @@ public class Pokemon {
 		//Set the pokemon Defense Points:
 		this.defensePoints = newDefensePoints;
 		//Set the pokemon standard abilities
-		this.abilities.add(ab1);
-		this.abilities.add(ab2);
+		this.passiveAbilities.add(ab1);
+		this.activeAbilities.add(ab2);
 		//Set the pokemon initial position:
 		this.position = position;
 		//Set d:
@@ -58,8 +61,9 @@ public class Pokemon {
 
 		this.defensePoints = Integer.parseInt(p[6]);
 
-		//this.abilities.add(p[7]);
-		//this.abilities.add(p[8]);
+		//this.passiveAbilities.add(p[7]);
+		//this.activeAbilities.add(p[8]);
+		//Falar com gustavo sobre ideia para simplificar isso aqui.
 
 		this.position = new Position(Integer.parseInt(p[9]), Integer.parseInt(p[10]), Integer.parseInt(p[11]));
 
@@ -88,16 +92,24 @@ public class Pokemon {
 		}
 	}
 	
-	public void teachAbility(IAbility newAb) {
-		if(this.findAbility(newAb.getName()) == false)
-		this.abilities.add(newAb);
+	public void teachAbility(IActiveAbility newAb) {
+		if(this.findAbility(this.activeAbilities,newAb.getName()) == false)
+			this.activeAbilities.add(newAb);
 		else {
 			//Não foi possivel add newAb;
 		}
 	}
 	
-	public boolean findAbility(String name) {
-		for(IAbility a : this.abilities) {
+	public void teachAbility(IPassiveAbility newAb) {
+		if(this.findAbility(this.passiveAbilities,newAb.getName()) == false)
+		this.passiveAbilities.add(newAb);
+		else {
+			//Não foi possivel add newAb;
+		}
+	}
+	
+	public boolean findAbility(ArrayList<IAbility> list,String name) {
+		for(IAbility a : list) {
 			if(a.getName() == name) {
 				return true; //Habilidade encontrada;
 			}
