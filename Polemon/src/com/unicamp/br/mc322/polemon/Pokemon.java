@@ -2,7 +2,6 @@ package com.unicamp.br.mc322.polemon;
 
 import java.util.ArrayList;
 
-import com.unicamp.br.mc322.polemon.abilities.IAbility;
 import com.unicamp.br.mc322.polemon.abilities.active.IActiveAbility;
 import com.unicamp.br.mc322.polemon.abilities.passive.IPassiveAbility;
 
@@ -14,8 +13,8 @@ public class Pokemon {
 	private int initialHp;
 	private int attackPoints; //Must be a positive value;
 	private int defensePoints; //Must be a positive value;
-	private ArrayList<IAbility> activeAbilities = new ArrayList<IAbility>(); //The Active Abilities list of the pokemon, there is no max index
-	private ArrayList<IAbility> passiveAbilities = new ArrayList<IAbility>(); //The Passive Abilities list of the pokemon, there is no max index
+	private ArrayList<IActiveAbility> activeAbilities = new ArrayList<IActiveAbility>(); //The Active Abilities list of the pokemon, there is no max index
+	private ArrayList<IPassiveAbility> passiveAbilities = new ArrayList<IPassiveAbility>(); //The Passive Abilities list of the pokemon, there is no max index
 	private Position position; //Pokemon initial Position;
 	private int d; //Distância máxima de captura;
 	private int k; //Dificuldade da captura, vai de 2(mais dificil) a 8(mais facil).
@@ -63,7 +62,6 @@ public class Pokemon {
 
 		//this.passiveAbilities.add(p[7]);
 		//this.activeAbilities.add(p[8]);
-		//Falar com gustavo sobre ideia para simplificar isso aqui.
 
 		this.position = new Position(Integer.parseInt(p[9]), Integer.parseInt(p[10]), Integer.parseInt(p[11]));
 
@@ -93,7 +91,7 @@ public class Pokemon {
 	}
 	
 	public void teachAbility(IActiveAbility newAb) {
-		if(this.findAbility(this.activeAbilities,newAb.getName()) == false)
+		if(this.findActiveAbility(newAb.getName()) == false)
 			this.activeAbilities.add(newAb);
 		else {
 			//Não foi possivel add newAb;
@@ -101,20 +99,37 @@ public class Pokemon {
 	}
 	
 	public void teachAbility(IPassiveAbility newAb) {
-		if(this.findAbility(this.passiveAbilities,newAb.getName()) == false)
+		if(this.findPassiveAbility(newAb.getName()) == false)
 		this.passiveAbilities.add(newAb);
 		else {
 			//Não foi possivel add newAb;
 		}
 	}
 	
-	public boolean findAbility(ArrayList<IAbility> list,String name) {
-		for(IAbility a : list) {
+	public boolean findPassiveAbility(String name) {
+		for(IPassiveAbility a : this.passiveAbilities) {
 			if(a.getName() == name) {
 				return true; //Habilidade encontrada;
 			}
 		}
 		return false; //Habilidade não encontrada;
+	}
+	
+	public boolean findActiveAbility(String name) {
+		for(IActiveAbility a : this.activeAbilities) {
+			if(a.getName() == name) {
+				return true; //Habilidade encontrada;
+			}
+		}
+		return false; //Habilidade não encontrada;
+	}
+	
+	public ArrayList<IPassiveAbility> getPassives(){
+		return this.passiveAbilities;
+	}
+	
+	public ArrayList<IActiveAbility> getActives(){
+		return this.activeAbilities;
 	}
 	
 	public ArrayList<Types> getPokemonType() {
@@ -135,6 +150,10 @@ public class Pokemon {
 		else if(newHp >= this.initialHp)
 			newHp = initialHp;
 		this.hp = newHp;
+	}
+	
+	public void setAttackPoints(int newAP) {
+		this.attackPoints = newAP;
 	}
 
 
