@@ -377,7 +377,9 @@ public class Game {
 	}
 
 	private void healPokemons() {
-		//hela 1 hp dos pokemons da bag
+		for (Pokemon p : this.player.getMinePokemons().getPokemonList())
+			if (p.getInitialHp() > p.getHp())
+				p.setHp(p.getHp()+1);
 	}
 
 }
