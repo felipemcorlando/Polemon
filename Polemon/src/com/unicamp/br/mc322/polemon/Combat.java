@@ -4,26 +4,26 @@ public class Combat {
 
 	private Player player;
 	private Pokemon targetPokemon;
-	private boolean firstPlayer;
+	private boolean playerShift;
 	
 	public Combat (Player pl, Pokemon po, boolean isPlayerFirst) {
 		this.player = pl;
 		this.targetPokemon = po;
-		this.firstPlayer = isPlayerFirst;
+		this.playerShift = isPlayerFirst;
 
 	}
 	
 	public void drawCombat () {
 		while (player.getActivatedPokemon().getHp()>0 && targetPokemon.getHp()>0) {
-			shift(player,targetPokemon,firstPlayer) ;
+			shift(player,targetPokemon,playerShift) ;
 		}
 	}
 	
 	
 	
 	
-	public void shift(Player pl, Pokemon po, boolean isPlayerFirst) {//turno de ataque
-		if (isPlayerFirst) {
+	public void shift(Player pl, Pokemon po, boolean playerShift) {//turno de ataque
+		if (playerShift) {
 			//player ataca primeiro 
 			playerAttack(pl,po);
 			if(po.getHp()<1)
