@@ -21,15 +21,29 @@ public class Game {
 		this.loadMappables(4);
 		
 		//creating the Player
-		Pokemon p1 = new Pokemon(Input.readLineFromFile("C:\\Users\\wyatt\\git\\polemon\\Polemon\\src\\com\\unicamp\\br\\mc322\\polemon\\firstPokemon.txt", 0));
-		Position initialPos = new Position(1,1,0);
+		Pokemon p1 = new Pokemon(Input.readLineFromFile("src/com/unicamp/br/mc322/polemon/firstPokemon.txt", 0));
+		Position initialPos = new Position(26,4,0); //switch to (1,1,0) //30,4,0
 		Island i1 = this.getIslandByPosition(initialPos);
 		
 		this.player = new Player(initialPos, p1, i1);
-		this.loadPokemons("C:\\Users\\wyatt\\git\\polemon\\Polemon\\src\\com\\unicamp\\br\\mc322\\polemon\\PokemonInstancesInfo.txt");
+		this.loadPokemons("src/com/unicamp/br/mc322/polemon/PokemonInstancesInfo.txt");
 		this.movements = 0;
 	}
 
+	public void start() {
+		this.exitSelected = false;
+		this.movements =  Dice.roll(6, 2);
+		System.out.println("Game started!");
+
+		while(!this.exitSelected) {
+			this.drawBoard();
+			String command = this.readInput();
+			this.updateGame(command);
+		}
+		System.out.println("Game terminated. Bye!");
+
+	}
+	
 	private void loadMappables(int plans) {
 		this.plans = new ArrayList<Plan>(plans);
 		for (int i = 0; i < plans; i++)
@@ -50,20 +64,6 @@ public class Game {
 	}
 
 	private void loadCollectables() {}
-
-	public void start() {
-		this.exitSelected = false;
-		this.movements =  Dice.roll(6, 2);
-		System.out.println("Game started!");
-
-		while(!this.exitSelected) {
-			this.drawBoard();
-			String command = this.readInput();
-			this.updateGame(command);
-		}
-		System.out.println("Game terminated. Bye!");
-
-	}
 	
 	private Island getPlayerActualIsland() {
 		//Updating because it is good to 
@@ -97,10 +97,9 @@ public class Game {
 		} else return true; 
 	}
 	
-	private void useMappable () {
+	private void useMappable (Island last) {
 		//checks if there is a Mappable in the same position of player
-		Island i = this.getPlayerActualIsland();
-		ArrayList<Mappable> map = i.getMoveObjects();
+		ArrayList<Mappable> map = last.getMoveObjects();
 		for (Mappable m : map) {
 			if (m.getPosition().equals(this.player.getGlobalPosition())) {
 				
@@ -124,7 +123,7 @@ public class Game {
 
 					this.player.getGlobalPosition().travel(0, -1, 0);
 					this.movements--;
-					this.useMappable();
+					this.useMappable(island);
 					break;
 				case "s":
 					if (!this.canMove(new Position(actual.getX(), actual.getY()+1, actual.getZ())))
@@ -132,7 +131,7 @@ public class Game {
 
 					this.player.getGlobalPosition().travel(0, 1, 0);
 					this.movements--;
-					this.useMappable();		
+					this.useMappable(island);		
 					break;
 				case "a":
 					if (!this.canMove(new Position(actual.getX()-1, actual.getY(), actual.getZ())))
@@ -140,7 +139,7 @@ public class Game {
 
 					this.player.getGlobalPosition().travel(-1, 0, 0);
 					this.movements--;
-					this.useMappable();
+					this.useMappable(island);
 					break;
 				case "d":
 					if (!this.canMove(new Position(actual.getX()+1, actual.getY(), actual.getZ())))
@@ -148,7 +147,7 @@ public class Game {
 
 					this.player.getGlobalPosition().travel(1, 0, 0);
 					this.movements--;
-					this.useMappable();
+					this.useMappable(island);
 					break;
 				default:
 					return;
@@ -235,11 +234,27 @@ public class Game {
 
 		return ret;
 	}
+	
+	private boolean pokemonInRange(Pokemon p) {
+		if (p.getPosition().getZ() != this.player.getGlobalPosition().getZ())
+			return false;
+		
+		int x1 = p.getPosition().getX()-p.getD();
+		int y1 = p.getPosition().getY()-p.getD();
+		int x2 = p.getPosition().getX()+p.getD();
+		int y2 = p.getPosition().getY()+p.getD();
+		int x = this.player.getGlobalPosition().getX();
+		int y = this.player.getGlobalPosition().getY();
+		if (x >= x1 && x <= x2 && y >= y1 && y <= y2)
+	        return true;
+		
+		return false;
+	}
 
 	private void drawBoard() {
 		cleanScreen();
 		Position playerPosition = this.player.getGlobalPosition();
-		System.out.println("Position: ("+playerPosition.getX()+","+playerPosition.getY()+")");
+		System.out.println("Position: ("+playerPosition.getX()+","+playerPosition.getY()+","+playerPosition.getZ()+")");
 
 		Island island = this.getPlayerActualIsland();
 
@@ -255,26 +270,27 @@ public class Game {
 			}
 
 		int xOffset = (int) island.getPosition().getX()-1;
-		int yOffset = (int) (island.getPosition().getY()-1.);
+		int yOffset = (int) island.getPosition().getY()-1;
 
-		//printar o pokemon soh se estiver dentro do range de captura
 		ArrayList<Pokemon> pl = island.getPokemons();
 		for (Pokemon p : pl)
-			table[p.getPosition().getX()-xOffset][p.getPosition().getY()-yOffset] = 'P';
-
+			if (this.pokemonInRange(p))
+				table[p.getPosition().getX()-xOffset][p.getPosition().getY()-yOffset] = 'P';
+		
+			
 		ArrayList<Collectable> itens = island.getItens();
 		for (Collectable item : itens)
 			table[item.getPosition().getX()-xOffset][item.getPosition().getY()-yOffset] = 'I'; //item.getChar();
 
 		ArrayList<Mappable> places = island.getMoveObjects();
 		for (Mappable map : places) 
-			table[map.getPosition().getX()-xOffset][map.getPosition().getY()-yOffset] = 'M';// map.getChar();
+			table[map.getPosition().getX()-xOffset][map.getPosition().getY()-yOffset] = map.getChar();
 
 		table[playerPosition.getX()-xOffset][playerPosition.getY()-yOffset] = 'O';
 
 		this.printMatrix(table);
 
-		System.out.println("Type of Island: "+island.getType());
+		System.out.println("Island "+island.getIndexOnPlan()+" - ("+island.getType()+")");
 		System.out.println("---------------------------------------------");
 		System.out.println("Pokemon bag: "+this.player.getMinePokemons().toString());
 		System.out.println("Inventory: "+this.player.getInventory().toString());
