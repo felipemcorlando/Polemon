@@ -21,7 +21,7 @@ public class Plan {
 	}
 	
 	public Island findIsland(Position position) {
-		if((position.getY()%(sizeOfIslands+1)==0) ||position.getY()==0 ||position.getX()==0||position.getX()==(sizeOfIslands+1)) {
+		if((position.getX()%(sizeOfIslands+1)==0) ||position.getY()==0 ||position.getX()==0||position.getY()==(sizeOfIslands+1)) {
 			//System.out.println("No island in this position");
 			return null;
 		}
