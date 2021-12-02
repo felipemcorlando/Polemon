@@ -20,7 +20,7 @@ public class Pokemon {
 	private int k; //Dificuldade da captura, vai de 2(mais dificil) a 8(mais facil).
 	
 	
-	public Pokemon(String name, Types type1, Types type2, int newHP, int newAttackPoints, int newDefensePoints, Position position) throws IllegalValueException{
+	public Pokemon(String name, Types type1, Types type2, int newHP, int newAttackPoints, int newDefensePoints, Position position){
 		//Set the name:
 		this.name = name;
 		//Set the pokemon type:
@@ -51,13 +51,13 @@ public class Pokemon {
 		this.type.add(this.getType(p[2]));
 
 		this.hp = Integer.parseInt(p[3]);
-		this.initialHp = Integer.parseInt(p[4]);
+		this.initialHp = (int) this.hp;
 
-		this.attackPoints = Integer.parseInt(p[5]);
+		this.attackPoints = Integer.parseInt(p[4]);
 
-		this.defensePoints = Integer.parseInt(p[6]);
+		this.defensePoints = Integer.parseInt(p[5]);
 
-		this.position = new Position(Integer.parseInt(p[7]), Integer.parseInt(p[8]), Integer.parseInt(p[9]));
+		this.position = new Position(Integer.parseInt(p[6]), Integer.parseInt(p[7]), Integer.parseInt(p[8]));
 
 		this.d = Dice.roll(4, 1);
 
