@@ -22,7 +22,7 @@ public class Game {
 
 		//creating the Player
 		Pokemon p1 = new Pokemon(Input.readLineFromFile("src/com/unicamp/br/mc322/polemon/firstPokemon.txt", 0));
-		Position initialPos = new Position(26,4,0); //switch to (1,1,0)
+		Position initialPos = new Position(1,1,0); //switch to (1,1,0)
 		Island i1 = this.getIslandByPosition(initialPos);
 
 		this.player = new Player(initialPos, p1, i1);
@@ -111,11 +111,16 @@ public class Game {
 					this.useItem();
 					break;
 				case "3":
-					this.callCombat();
+					Pokemon target = this.chooseAvailablePokemons();
+					System.out.println(target.toString());
+					//if (target != null)
+						//this.callCombat(target);
 					break;
 				case "4":
-					this.capturePokemon();
-					break;
+					//Pokemon target = this.chooseAvailablePokemons();
+					//if (target != null)
+						//this.capturePokemon(target);
+						break;
 				case "5":
 					this.movements = Dice.roll(6,2);
 					break;
@@ -128,7 +133,7 @@ public class Game {
 
 
 		} else { //is in combat mode
-			Combat newCombat = new Combat(this.player,)
+			//Combat newCombat = new Combat(this.player,)
 		}
 	}
 
@@ -232,7 +237,7 @@ public class Game {
 			}
 		}
 	}
-	
+
 	private void useItem() {
 		cleanScreen();
 		System.out.println("Select one item to use:");
@@ -252,7 +257,7 @@ public class Game {
 			printException(e.getMessage());
 		}
 	}
-	
+
 	//Get methods
 	private Island getPlayerActualIsland() {
 		//Updating because it is good to 
@@ -281,7 +286,7 @@ public class Game {
 			return false;
 		} else return true; 
 	}
-	
+
 	private boolean pokemonInRange(Pokemon p) {
 		if (p.getPosition().getZ() != this.player.getGlobalPosition().getZ())
 			return false;
@@ -297,7 +302,7 @@ public class Game {
 
 		return false;
 	}
-	
+
 	//Utility methods
 	public void printException(String error) {
 		System.out.println(error);
@@ -306,6 +311,42 @@ public class Game {
 	public final static void cleanScreen() {
 		//Jumps 20 lines to 'clear' console
 		for (int i = 0; i < 20; ++i) System.out.println();
+	}
+
+	public Pokemon chooseAvailablePokemons() {
+		cleanScreen();
+
+		ArrayList<Pokemon> l = this.getPlayerActualIsland().getPokemons();
+		int i = 1;
+
+		if (l != null) {
+			System.out.println("Choose one Pokemon available: ");
+			for (Pokemon p : l) {
+				if (this.pokemonInRange(p)) {
+					System.out.println(i+" - "+p.toString());
+					i++;
+				}
+			}
+		}
+
+		if (i == 1 || l == null) {
+			System.out.println("No pokemons available!");
+			return null;
+		}
+
+		try {
+			String str = Input.readKeyboard();
+			if (str == "")
+				return null;
+
+			int choice = Integer.parseInt(str);
+			return l.get(choice-1);
+
+		} catch (Exception e) {
+			printException(e.getMessage());
+		}
+		
+		return null;
 	}
 
 	//Other methods
@@ -328,15 +369,13 @@ public class Game {
 			printException(e.getMessage());
 		}
 	}
-	
-	public boolean capturePokemon() {
-		
-	}
-	
+
+	//public boolean capturePokemon() {	}
+
 	public void callCombat() {
-		
+
 	}
-	
+
 	private void healPokemons() {
 		//hela 1 hp dos pokemons da bag
 	}
