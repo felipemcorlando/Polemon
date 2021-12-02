@@ -19,17 +19,18 @@ public class Game {
 	public Game() {
 		this.exitSelected = false;
 		this.loadMappables(4);
-		
+
 		//creating the Player
 		Pokemon p1 = new Pokemon(Input.readLineFromFile("src/com/unicamp/br/mc322/polemon/firstPokemon.txt", 0));
-		Position initialPos = new Position(26,4,0); //switch to (1,1,0) //30,4,0
+		Position initialPos = new Position(26,4,0); //switch to (1,1,0)
 		Island i1 = this.getIslandByPosition(initialPos);
-		
+
 		this.player = new Player(initialPos, p1, i1);
 		this.loadPokemons("src/com/unicamp/br/mc322/polemon/PokemonInstancesInfo.txt");
 		this.movements = 0;
 	}
 
+	//Main methods of class Game
 	public void start() {
 		this.exitSelected = false;
 		this.movements =  Dice.roll(6, 2);
@@ -39,78 +40,20 @@ public class Game {
 			this.drawBoard();
 			String command = this.readInput();
 			this.updateGame(command);
+			//checar condição de vitória
 		}
 		System.out.println("Game terminated. Bye!");
 
 	}
-	
-	private void loadMappables(int plans) {
-		this.plans = new ArrayList<Plan>(plans);
-		for (int i = 0; i < plans; i++)
-			this.plans.add(new Plan(i, 8));
+
+	private String readInput() {
+		String ret = Input.readKeyboard();
+		if (ret.toLowerCase() == "quit")
+			this.exitSelected = true;
+
+		return ret;
 	}
 
-	public void printException(String error) {
-		System.out.println(error);
-	}
-
-	private void loadPokemons(String path) {
-		this.wildPokemons = new ArrayList<Pokemon>();
-		for (int i = 0; i < Input.countLines(path); i++) {
-			Pokemon p = new Pokemon(Input.readLineFromFile(path, i));
-			this.wildPokemons.add(p);
-			getIslandByPosition(p.getPosition()).addPokemon(p);
-		}
-	}
-
-	private void loadCollectables() {}
-	
-	private Island getPlayerActualIsland() {
-		//Updating because it is good to 
-		this.player.setActualIsland(this.plans.get(this.player.getGlobalPosition().getZ()).findIsland(this.player.getGlobalPosition()));
-		return this.player.getActualIsland();
-	}
-
-	private Island getIslandByPosition(Position pos) {
-		return this.plans.get(pos.getZ()).findIsland(pos);	
-	}
-
-	private boolean inMovementMode() {
-		return !(this.movements == 0);
-	}
-
-	private final static void cleanScreen() {
-		//Jumps 20 lines to 'clear' console
-		for (int i = 0; i < 20; ++i) System.out.println();
-	}
-
-	private boolean canMove(Position target) {
-		Island i = this.getIslandByPosition(target);
-		if (i == null) { //maybe there is a bridge in the border
-			i = this.getPlayerActualIsland();
-			ArrayList<Mappable> map = i.getMoveObjects();
-			for (Mappable m : map)
-				if (m.getPosition().equals(target)) //there is a bridge in border
-					return true;
-			
-			return false;
-		} else return true; 
-	}
-	
-	private void useMappable (Island last) {
-		//checks if there is a Mappable in the same position of player
-		ArrayList<Mappable> map = last.getMoveObjects();
-		for (Mappable m : map) {
-			if (m.getPosition().equals(this.player.getGlobalPosition())) {
-				
-				m.movePlayer(this.player);
-				this.getPlayerActualIsland(); //updates the actual island
-				
-				return;
-			}
-		}
-	}
-	
 	private void updateGame(String command) {
 		if (!this.player.isInCombat()) { //is in movement/action mode
 			if (this.inMovementMode()) { 
@@ -127,7 +70,7 @@ public class Game {
 					break;
 				case "s":
 					if (!this.canMove(new Position(actual.getX(), actual.getY()+1, actual.getZ())))
-							return;
+						return;
 
 					this.player.getGlobalPosition().travel(0, 1, 0);
 					this.movements--;
@@ -135,7 +78,7 @@ public class Game {
 					break;
 				case "a":
 					if (!this.canMove(new Position(actual.getX()-1, actual.getY(), actual.getZ())))
-							return;
+						return;
 
 					this.player.getGlobalPosition().travel(-1, 0, 0);
 					this.movements--;
@@ -143,7 +86,7 @@ public class Game {
 					break;
 				case "d":
 					if (!this.canMove(new Position(actual.getX()+1, actual.getY(), actual.getZ())))
-							return;
+						return;
 
 					this.player.getGlobalPosition().travel(1, 0, 0);
 					this.movements--;
@@ -156,10 +99,13 @@ public class Game {
 				if (newItem != null)
 					System.out.println("Item collected: "+ newItem.toString());
 
+				this.healPokemons();
+
 			} else { //is in action mode
 				switch(command) {
 				case "1":
-					this.choosePokemon();
+					this.choosePokemon(); 
+					//volta para o indice
 					break;
 				case "2":
 					this.useItem();
@@ -184,71 +130,6 @@ public class Game {
 		} else { //is in combat mode
 
 		}
-	}
-
-	private void choosePokemon() {
-		cleanScreen();
-		System.out.println("Choose one pokemon:");
-		ArrayList<Pokemon> pb = this.player.getMinePokemons().getPokemonList();
-		for (int i = 0; i < pb.size(); i++) 
-			System.out.println((i+1)+" - "+pb.get(i));
-
-		try {
-			String str = Input.readKeyboard();
-			if (str == "")
-				return;
-
-			int choice = Integer.parseInt(str);
-			this.player.choosePokemon(choice-1);
-
-		} catch (Exception e) {
-			printException(e.getMessage());
-		}
-	}
-	
-	private void useItem() {
-		cleanScreen();
-		System.out.println("Select one item to use:");
-		ArrayList<Collectable> inv = this.player.getInventory().getItemsList();
-		for (int i = 0; i < inv.size(); i++) 
-			System.out.println((i+1)+" - "+inv.get(i));
-
-		try {
-			String str = Input.readKeyboard();
-			if (str == "")
-				return;
-
-			int choice = Integer.parseInt(str);
-			this.player.useItem(inv.get(choice-1));
-
-		} catch (Exception e) {
-			printException(e.getMessage());
-		}
-
-	}
-	
-	private String readInput() {
-		String ret = Input.readKeyboard();
-		if (ret.toLowerCase() == "quit")
-			this.exitSelected = true;
-
-		return ret;
-	}
-	
-	private boolean pokemonInRange(Pokemon p) {
-		if (p.getPosition().getZ() != this.player.getGlobalPosition().getZ())
-			return false;
-		
-		int x1 = p.getPosition().getX()-p.getD();
-		int y1 = p.getPosition().getY()-p.getD();
-		int x2 = p.getPosition().getX()+p.getD();
-		int y2 = p.getPosition().getY()+p.getD();
-		int x = this.player.getGlobalPosition().getX();
-		int y = this.player.getGlobalPosition().getY();
-		if (x >= x1 && x <= x2 && y >= y1 && y <= y2)
-	        return true;
-		
-		return false;
 	}
 
 	private void drawBoard() {
@@ -276,8 +157,8 @@ public class Game {
 		for (Pokemon p : pl)
 			if (this.pokemonInRange(p))
 				table[p.getPosition().getX()-xOffset][p.getPosition().getY()-yOffset] = 'P';
-		
-			
+
+
 		ArrayList<Collectable> itens = island.getItens();
 		for (Collectable item : itens)
 			table[item.getPosition().getX()-xOffset][item.getPosition().getY()-yOffset] = 'I'; //item.getChar();
@@ -290,7 +171,7 @@ public class Game {
 
 		this.printMatrix(table);
 
-		System.out.println("Island "+island.getIndexOnPlan()+" - ("+island.getType()+")");
+		System.out.println("Island "+(island.getIndexOnPlan()+1)+" - ("+island.getType()+")");
 		System.out.println("---------------------------------------------");
 		System.out.println("Pokemon bag: "+this.player.getMinePokemons().toString());
 		System.out.println("Inventory: "+this.player.getInventory().toString());
@@ -317,6 +198,139 @@ public class Game {
 			}
 			System.out.println();
 		} 
+	}
+
+	//Load methods
+	private void loadMappables(int plans) {
+		this.plans = new ArrayList<Plan>(plans);
+		for (int i = 0; i < plans; i++)
+			this.plans.add(new Plan(i, 8));
+	}
+
+	private void loadPokemons(String path) {
+		this.wildPokemons = new ArrayList<Pokemon>();
+		for (int i = 0; i < Input.countLines(path); i++) {
+			Pokemon p = new Pokemon(Input.readLineFromFile(path, i));
+			this.wildPokemons.add(p);
+			getIslandByPosition(p.getPosition()).addPokemon(p);
+		}
+	}
+
+	private void loadCollectables() {}
+
+	//Use methods
+	private void useMappable (Island last) {
+		//checks if there is a Mappable in the same position of player
+		ArrayList<Mappable> map = last.getMoveObjects();
+		for (Mappable m : map) {
+			if (m.getPosition().equals(this.player.getGlobalPosition())) {
+
+				m.movePlayer(this.player);
+				this.getPlayerActualIsland(); //updates the actual island
+
+				return;
+			}
+		}
+	}
+	
+	private void useItem() {
+		cleanScreen();
+		System.out.println("Select one item to use:");
+		ArrayList<Collectable> inv = this.player.getInventory().getItemsList();
+		for (int i = 0; i < inv.size(); i++) 
+			System.out.println((i+1)+" - "+inv.get(i));
+
+		try {
+			String str = Input.readKeyboard();
+			if (str == "")
+				return;
+
+			int choice = Integer.parseInt(str);
+			this.player.useItem(inv.get(choice-1));
+
+		} catch (Exception e) {
+			printException(e.getMessage());
+		}
+	}
+	
+	//Get methods
+	private Island getPlayerActualIsland() {
+		//Updating because it is good to 
+		this.player.setActualIsland(this.plans.get(this.player.getGlobalPosition().getZ()).findIsland(this.player.getGlobalPosition()));
+		return this.player.getActualIsland();
+	}
+
+	private Island getIslandByPosition(Position pos) {
+		return this.plans.get(pos.getZ()).findIsland(pos);	
+	}
+
+	//Boolean methods
+	private boolean inMovementMode() {
+		return !(this.movements == 0);
+	}
+
+	private boolean canMove(Position target) {
+		Island i = this.getIslandByPosition(target);
+		if (i == null) { //maybe there is a bridge in the border
+			i = this.getPlayerActualIsland();
+			ArrayList<Mappable> map = i.getMoveObjects();
+			for (Mappable m : map)
+				if (m.getPosition().equals(target)) //there is a bridge in border
+					return true;
+
+			return false;
+		} else return true; 
+	}
+	
+	private boolean pokemonInRange(Pokemon p) {
+		if (p.getPosition().getZ() != this.player.getGlobalPosition().getZ())
+			return false;
+
+		int x1 = p.getPosition().getX()-p.getD();
+		int y1 = p.getPosition().getY()-p.getD();
+		int x2 = p.getPosition().getX()+p.getD();
+		int y2 = p.getPosition().getY()+p.getD();
+		int x = this.player.getGlobalPosition().getX();
+		int y = this.player.getGlobalPosition().getY();
+		if (x >= x1 && x <= x2 && y >= y1 && y <= y2)
+			return true;
+
+		return false;
+	}
+	
+	//Utility methods
+	public void printException(String error) {
+		System.out.println(error);
+	}
+
+	public final static void cleanScreen() {
+		//Jumps 20 lines to 'clear' console
+		for (int i = 0; i < 20; ++i) System.out.println();
+	}
+
+	//Other methods
+	private void choosePokemon() {
+		cleanScreen();
+		System.out.println("Choose one pokemon:");
+		ArrayList<Pokemon> pb = this.player.getMinePokemons().getPokemonList();
+		for (int i = 0; i < pb.size(); i++) 
+			System.out.println((i+1)+" - "+pb.get(i));
+
+		try {
+			String str = Input.readKeyboard();
+			if (str == "")
+				return;
+
+			int choice = Integer.parseInt(str);
+			this.player.choosePokemon(choice-1);
+
+		} catch (Exception e) {
+			printException(e.getMessage());
+		}
+	}
+	
+	private void healPokemons() {
+		//hela 1 hp dos pokemons da bag
 	}
 
 }

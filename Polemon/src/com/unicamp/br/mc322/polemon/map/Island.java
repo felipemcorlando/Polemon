@@ -113,7 +113,7 @@ public class Island {
 	
 	public void getLowInfo() {
 		//System.out.println("Island "+indexOnPlan+" from plan "+position.getZ()+"\t type : "+type.name() );
-		System.out.println("Island "+indexOnPlan+" ("+type.name()+") from plan "+position.getZ());
+		System.out.println("Island "+(indexOnPlan+1)+" ("+type.name()+") from plan "+position.getZ());
 		return;
 	}
 	

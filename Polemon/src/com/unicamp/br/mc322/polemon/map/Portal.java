@@ -37,7 +37,7 @@ public class Portal implements Mappable {
 		}
 
 		try {
-			int command = Integer.parseInt(Input.readKeyboard());
+			int command = Integer.parseInt(Input.readKeyboard())-1;
 			
 			player.setGlobalPosition(new Position (visitedIslands.get(command).getPosition()));
 			
