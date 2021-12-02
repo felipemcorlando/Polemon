@@ -21,12 +21,12 @@ public class Game {
 		this.loadMappables(4);
 
 		//creating the Player
-		Pokemon p1 = new Pokemon(Input.readLineFromFile("src/com/unicamp/br/mc322/polemon/firstPokemon.txt", 0));
+		Pokemon p1 = new Pokemon("Totodile",Types.WATER,null,44,50,65,new Position(0,0,0));
 		Position initialPos = new Position(1,1,0); //switch to (1,1,0)
 		Island i1 = this.getIslandByPosition(initialPos);
 
 		this.player = new Player(initialPos, p1, i1);
-		this.loadPokemons("src/com/unicamp/br/mc322/polemon/PokemonInstancesInfo.txt");
+		this.loadPokemons("src/com/unicamp/br/mc322/polemon/PokemonInstancesInfo");
 		this.movements = 0;
 	}
 
@@ -40,7 +40,7 @@ public class Game {
 			this.drawBoard();
 			String command = this.readInput();
 			this.updateGame(command);
-			//checar condição de vitória
+			//checar condiï¿½ï¿½o de vitï¿½ria
 		}
 		System.out.println("Game terminated. Bye!");
 
