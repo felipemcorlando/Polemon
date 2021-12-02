@@ -8,6 +8,12 @@ public class Position {
 		this.setY(y);
 		this.setZ(z);
 	}
+	
+	public Position(Position o) {
+		this.setX(o.getX());
+		this.setY(o.getY());
+		this.setZ(o.getZ());
+	}
 
 	public int getX() {
 		return x;

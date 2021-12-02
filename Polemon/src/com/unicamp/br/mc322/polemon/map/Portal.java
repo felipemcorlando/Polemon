@@ -9,12 +9,12 @@ import com.unicamp.br.mc322.polemon.Position;
 
 public class Portal implements Mappable {
 	private Position position;
-	
+
 	public Portal(Position newPosition) {
 		position=newPosition;
 	}
-	
-	
+
+
 	@Override
 	public char getChar() {
 		// TODO Auto-generated method stub
@@ -29,19 +29,21 @@ public class Portal implements Mappable {
 			System.out.println("No visited islands");
 			return;
 		}
-		System.out.println("Chose one island :");
+		System.out.println("\nChoose one island :");
 		for (Island aux : visitedIslands) {
 			aux.getLowInfo();
 			System.out.println("Press "+visitedIslands.indexOf(aux));
 		}
-		// adicionar try , catch
-		
-		int comand = Integer.parseInt(Input.readKeyboard());
-		Island selectedIsland = visitedIslands.get(comand);
-		
-		player.setGlobalPosition(selectedIsland.getPosition());
-		
-		
+
+		try {
+			int command = Integer.parseInt(Input.readKeyboard());
+			
+			player.setGlobalPosition(new Position (visitedIslands.get(command).getPosition()));
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 
