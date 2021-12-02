@@ -114,7 +114,7 @@ public class Game {
 					this.callCombat();
 					break;
 				case "4":
-
+					this.capturePokemon();
 					break;
 				case "5":
 					this.movements = Dice.roll(6,2);
@@ -327,6 +327,14 @@ public class Game {
 		} catch (Exception e) {
 			printException(e.getMessage());
 		}
+	}
+	
+	public boolean capturePokemon() {
+		
+	}
+	
+	public void callCombat() {
+		
 	}
 	
 	private void healPokemons() {
