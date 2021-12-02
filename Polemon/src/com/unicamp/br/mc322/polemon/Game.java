@@ -111,7 +111,7 @@ public class Game {
 					this.useItem();
 					break;
 				case "3":
-
+					this.callCombat();
 					break;
 				case "4":
 
@@ -128,7 +128,7 @@ public class Game {
 
 
 		} else { //is in combat mode
-
+			Combat newCombat = new Combat(this.player,)
 		}
 	}
 

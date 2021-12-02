@@ -93,6 +93,9 @@ public class Player {
 	}
 
 	public void setActualIsland(Island actualIsland) {
+		if (!this.visitedIslands.contains(actualIsland))
+			this.visitedIslands.add(actualIsland);
+		
 		this.actualIsland = actualIsland;
 	}
 
@@ -102,6 +105,10 @@ public class Player {
 
 	public void setActivatedPokemon(Pokemon activatedPokemon) {
 		this.activatedPokemon = activatedPokemon;
+	}
+	
+	public void setInCombat (boolean x) {
+		this.inCombat = x;
 	}
 	
 }
