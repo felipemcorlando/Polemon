@@ -183,6 +183,6 @@ public class Pokemon {
 		if (this.hp <= 0) //desmaiado
 			return this.name + " X-X";
 		else
-			return this.name+" HP:"+this.hp+" ATK:"+this.attackPoints+" DEF:"+this.defensePoints;
+			return this.name+" | HP:"+this.hp+" | ATK:"+this.attackPoints+" | DEF:"+this.defensePoints;
 	}
 }
