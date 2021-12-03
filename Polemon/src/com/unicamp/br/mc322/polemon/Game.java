@@ -148,9 +148,11 @@ public class Game {
 								//ganhou o combate, perguntar se quer add na bag
 								System.out.println(tar.getName()+" fainted. Do you want to add to your bag?\n1-YES 2-NO : ");
 								int c = Integer.parseInt(Input.readKeyboard().substring(0,1));
-								if (c == 1)
+								if (c == 1) {
+									tar.setHp(tar.getInitialHp());
 									this.player.getMinePokemons().addPokemon(tar);
-
+								}
+								
 								this.wildPokemons.remove(tar);
 								this.getPlayerActualIsland().getPokemons().remove(tar);
 							} else {
@@ -450,7 +452,7 @@ public class Game {
 				if(acumuladora == 1)
 					System.out.println("Primeira tentativa de captura falhou!");
 				else
-					System.out.println("Segunda tenttiva de captura falhou! "+target.getName()+" se tornou hostil!");
+					System.out.println("Segunda tentativa de captura falhou! "+target.getName()+" se tornou hostil!");
 			}
 		}
 		return false;

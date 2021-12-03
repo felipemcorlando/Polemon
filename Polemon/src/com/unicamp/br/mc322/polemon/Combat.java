@@ -115,7 +115,7 @@ public class Combat {
 			}
 			
 			if (command < i && command > 0) {
-				damage = abs.get(i-1).useHability(this.player.getActivatedPokemon(), this.targetPokemon);
+				damage = abs.get(i-2).useHability(this.player.getActivatedPokemon(), this.targetPokemon);
 				this.targetPokemon.setHp(this.targetPokemon.getHp()-damage);
 				System.out.println("+You damaged "+this.targetPokemon.getName()+" by "+damage+" hp!");
 				return;

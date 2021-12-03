@@ -33,7 +33,7 @@ public class Inventory {
 	public String toString() {
 		String s = "";
 		for(Collectable i : this.itemsList) {
-			s = s + i.getName()+" ";
+			s = s + i +" ";
 		}
 		return s;
 	}
