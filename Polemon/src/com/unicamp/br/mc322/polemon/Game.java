@@ -273,7 +273,7 @@ public class Game {
 		System.out.println("Select one item to use:");
 		ArrayList<Collectable> inv = this.player.getInventory().getItemsList();
 		for (int i = 0; i < inv.size(); i++) 
-			System.out.println((i+1)+" - "+inv.get(i));
+			System.out.println((i+1)+" - "+inv.get(i).getName());
 
 		try {
 			String str = Input.readKeyboard();

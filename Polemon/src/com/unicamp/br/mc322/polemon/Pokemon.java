@@ -144,9 +144,11 @@ public class Pokemon {
 	
 	public void setHp(double newHp) {
 		if(newHp <= 0) 
-			this.hp = 0;
+			newHp = 0;
 		else if(newHp >= this.initialHp)
-			this.hp = this.initialHp;
+			newHp = this.initialHp;
+		
+		this.hp = newHp;
 	}
 	
 	public void setAttackPoints(int newAP) {
