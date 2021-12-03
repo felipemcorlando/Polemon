@@ -46,6 +46,12 @@ public class Confusion implements IActiveAbility {
 	}
 
 	@Override
+	public String toString() {
+		String s = this.getName()+"(Damage = "+this.damage+")";
+		return s;
+	}
+	
+	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		return this.name;

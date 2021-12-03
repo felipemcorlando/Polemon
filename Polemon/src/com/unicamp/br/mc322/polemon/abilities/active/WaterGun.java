@@ -45,6 +45,12 @@ public class WaterGun implements IActiveAbility {
 		}
 		return false; //O Pokemon não consegue aprender a habilidade
 	}
+	
+	@Override
+	public String toString() {
+		String s = this.getName()+"(Damage = "+this.damage+")";
+		return s;
+	}
 
 	@Override
 	public String getName() {

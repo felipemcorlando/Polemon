@@ -10,4 +10,6 @@ public interface IActiveAbility {
 	
 	public String getName();
 	
+	public String toString();
+	
 }

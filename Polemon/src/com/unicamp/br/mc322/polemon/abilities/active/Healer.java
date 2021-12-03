@@ -44,6 +44,12 @@ public class Healer implements IActiveAbility {
 		}
 		return false; //O Pokemon não consegue aprender a habilidade
 	}
+	
+	@Override
+	public String toString() {
+		String s = this.getName()+"(Heal Ability)";
+		return s;
+	}
 
 	@Override
 	public String getName() {
