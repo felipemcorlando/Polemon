@@ -21,7 +21,7 @@ public class Game {
 		this.loadMappables(4);
 
 		//creating the Player
-		Pokemon p1 = new Pokemon("Totodile",Types.WATER,null,44,50,65,new Position(0,0,0));
+		Pokemon p1 = new Pokemon("Totodile",Types.WATER,null,220,90,65,new Position(0,0,0));
 		Position initialPos = new Position(1,1,0); //switch to (1,1,0)
 		Island i1 = this.getIslandByPosition(initialPos);
 
