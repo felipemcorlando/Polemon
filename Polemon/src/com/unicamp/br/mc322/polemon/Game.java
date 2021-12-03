@@ -118,18 +118,43 @@ public class Game {
 						Combat newCombat = new Combat(this.player, target, true);
 						if (newCombat.runCombat()) {
 							//ganhou o combate, perguntar se quer add na bag
+							System.out.println("\n"+target.getName()+" fainted. Do you want to add to your bag?\n1-YES 2-NO : ");
+							int c = Integer.parseInt(Input.readKeyboard().substring(0,1));
+							if (c == 1)
+								this.player.getMinePokemons().addItem(target);
+							
+							this.wildPokemons.remove(target);
+							this.getPlayerActualIsland().getPokemons().remove(target);
+							
+						} else {
+							//acabou o jogo
+							System.out.println("GAME OVER!!!");
+							this.exitSelected = true;
 						}
 							
 					}
 					break;
 				case "4":
-					//Pokemon t = this.chooseAvailablePokemons();
-					//if (t != null) {
-						//if (!this.capturePokemon(t)) { //nao deu certo, entra no modo combat
-							//Combat newCombat = new Combat(this.player, t, false);
-							//newCombat.runCombat();
+					Pokemon tar = this.chooseAvailablePokemons();
+					if (tar != null) {
+						//if (!this.capturePokemon(tar)) { //nao deu certo, entra no modo combat
+							Combat newCombat = new Combat(this.player, tar, false);
+							if (newCombat.runCombat()) {
+								//ganhou o combate, perguntar se quer add na bag
+								System.out.println(tar.getName()+" fainted. Do you want to add to your bag?\n1-YES 2-NO : ");
+								int c = Integer.parseInt(Input.readKeyboard().substring(0,1));
+								if (c == 1)
+									this.player.getMinePokemons().addItem(tar);
+
+								this.wildPokemons.remove(tar);
+								this.getPlayerActualIsland().getPokemons().remove(tar);
+							} else {
+								//acabou o jogo
+								System.out.println("GAME OVER!!!");
+								this.exitSelected = true;
+							}
 						//}
-					//}
+					}
 						break;
 				case "5":
 					this.movements = Dice.roll(6,2);
@@ -139,11 +164,7 @@ public class Game {
 
 				}
 			}
-
-
-
-		} else { //is in combat mode
-		}
+		} 
 	}
 
 	private void drawBoard() {
@@ -406,7 +427,12 @@ public class Game {
 		}
 	}
 
-	//public boolean capturePokemon() {	}
+	public boolean capturePokemon(Pokemon target) {
+		//implementar tentativa de captura do pokemon
+		//true se capturou
+		//false se nao, então vai comecar um combat (no updateGame)
+		return true;
+	}
 
 	private void healPokemons() {
 		for (Pokemon p : this.player.getMinePokemons().getPokemonList())

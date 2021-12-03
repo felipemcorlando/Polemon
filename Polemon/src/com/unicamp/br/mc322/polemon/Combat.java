@@ -54,9 +54,11 @@ public class Combat {
 			//pokemon ataca primeiro
 			this.pokemonAttack();
 
-			if(this.player.getActivatedPokemon().getHp()<1)
-				if (this.switchPokemon())
-					this.playerAttack();
+			if(this.player.getActivatedPokemon().getHp()<1) 
+				if (!this.switchPokemon())
+					return;
+
+			this.playerAttack();
 		}
 		
 		if(this.player.getActivatedPokemon().getHp()<1)
@@ -126,7 +128,10 @@ public class Combat {
 	public void pokemonAttack() {
 		double damage = baseAttack(this.targetPokemon,this.player.getActivatedPokemon());
 		this.player.getActivatedPokemon().setHp(this.player.getActivatedPokemon().getHp()-damage);
-		System.out.println("+"+this.targetPokemon.getName()+" damaged "+this.player.getActivatedPokemon().getName()+" by "+damage+" hp!\n");
+		if (!this.playerShift)
+			System.out.println();
+			
+			System.out.println("+"+this.targetPokemon.getName()+" damaged "+this.player.getActivatedPokemon().getName()+" by "+damage+" hp!\n");
 	}
 	
 	public double baseAttack(Pokemon attacker , Pokemon defensor ) {
