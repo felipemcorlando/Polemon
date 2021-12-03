@@ -93,7 +93,7 @@ public class Combat {
 		ArrayList<IActiveAbility> abs = this.player.getActivatedPokemon().getActives();
 		
 		for (IActiveAbility a : abs) {
-			System.out.println("\n"+i+" - "+a.getName());
+			System.out.println("\n"+i+" - "+a);
 			i++;
 		}
 		
