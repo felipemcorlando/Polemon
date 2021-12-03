@@ -118,6 +118,10 @@ public class Pokemon {
 		return false; //Habilidade não encontrada;
 	}
 	
+	public IActiveAbility getActiveAbility(int index) {
+		return activeAbilities.get(index);
+	}
+	
 	public ArrayList<IPassiveAbility> getPassives(){
 		return this.passiveAbilities;
 	}
