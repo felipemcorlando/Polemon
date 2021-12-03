@@ -20,7 +20,7 @@ public class Player {
 	public Player(Position initialPos, Pokemon starter, Island initialIsland) {
 		this.globalPosition = initialPos;
 		this.minePokemons = new PokemonBag();
-		this.minePokemons.addItem(starter);
+		this.minePokemons.addPokemon(starter);
 		this.activatedPokemon = this.minePokemons.getPokemonList().get(0);
 		
 		this.inventory = new Inventory();
@@ -73,6 +73,10 @@ public class Player {
 	
 	public Position getGlobalPosition() {
 		return globalPosition;
+	}
+	
+	public void capturePokemon(Pokemon target) {
+		this.minePokemons.addPokemon(target);
 	}
 
 	public void setGlobalPosition(Position globalPosition) {
