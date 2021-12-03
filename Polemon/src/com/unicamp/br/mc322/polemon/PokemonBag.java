@@ -35,4 +35,12 @@ public class PokemonBag {
 		}
 		return s;
 	}
+	
+	public boolean checkPokemonsLife() {
+		for(Pokemon p : pokemonList) {
+			if(p.getHp()>0)
+				return true;
+		}
+		return false;
+	}
 }

@@ -39,7 +39,9 @@ public class Player {
 	public boolean isInCombat() {
 		return this.inCombat;
 	}
-	
+	public boolean checkPokemonsLife() {//if all pokemons are dead , returns false
+		return minePokemons.checkPokemonsLife();
+	}
 	public Collectable collectItem(Plan actualPlan) {
 		//checks if there is an item in the same position of player, if true collects
 		Island island = actualPlan.findIsland(this.globalPosition);
