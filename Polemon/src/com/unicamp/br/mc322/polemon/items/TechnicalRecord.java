@@ -13,6 +13,7 @@ public abstract class TechnicalRecord implements Collectable {
 		return position;
 	}
 	
+	@Override
 	public String toString() {
 		return this.getName();
 	}
