@@ -214,7 +214,7 @@ public class Game {
 
 		System.out.println("Island "+(island.getIndexOnPlan()+1)+" - ("+island.getType()+")");
 		System.out.println("---------------------------------------------");
-		System.out.println("Pokemon bag: "+this.player.getMinePokemons().toString());
+		System.out.println("Pokemon bag: "+this.player.getMinePokemons().toString(this.player.getActivatedPokemon()));
 		System.out.println("Inventory: "+this.player.getInventory().toString());
 		System.out.println("---------------------------------------------");
 
@@ -402,8 +402,9 @@ public class Game {
 				return null;
 
 			int choice = Integer.parseInt(str);
-			//verificar erro qnd soh o 2o da lista de pokemons esta no range
-			//o programa pega o outro pokemon q nao est� no range
+			if (!this.pokemonInRange(l.get(0)))
+				choice++;
+			
 			return l.get(choice-1);
 
 		} catch (Exception e) {
