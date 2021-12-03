@@ -19,7 +19,9 @@ public class Fruit implements Collectable{
 		String[] p = register.split(" ");
 		this.name = p[0];	
 		
-		this.position = new Position(Integer.parseInt(p[1]), Integer.parseInt(p[2]), Integer.parseInt(p[3]));
+		this.healQtd = Integer.parseInt(p[1]);
+		
+		this.position = new Position(Integer.parseInt(p[2]), Integer.parseInt(p[3]), Integer.parseInt(p[4]));
 		
 	}
 	
