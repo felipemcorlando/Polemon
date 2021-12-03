@@ -36,6 +36,17 @@ public class PokemonBag {
 		return s;
 	}
 	
+	public String toString(Pokemon activated) {
+		String s = "";
+		for(Pokemon p : this.pokemonList) {
+			if (p == activated)
+				s = s +" {"+p.getName()+ "("+p.getHp()+"HP)} ";
+			else
+				s = s + p.getName()+ "("+p.getHp()+"HP) ";
+		}
+		return s;
+	}
+	
 	public boolean checkPokemonsLife() {
 		for(Pokemon p : pokemonList) {
 			if(p.getHp()>0)
