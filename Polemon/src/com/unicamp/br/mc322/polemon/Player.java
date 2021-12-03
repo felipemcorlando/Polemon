@@ -65,7 +65,11 @@ public class Player {
 		return true;
 	}
 	
-	public void useItem(Collectable item) {}
+	public void useItem(Collectable item) {
+		boolean a = item.useItem(activatedPokemon);
+		if (a)
+			this.inventory.removeItem(item);
+	}
 	
 	public Position getGlobalPosition() {
 		return globalPosition;
