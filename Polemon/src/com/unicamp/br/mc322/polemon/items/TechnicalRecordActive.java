@@ -49,60 +49,88 @@ public class TechnicalRecordActive extends TechnicalRecord {
 		switch(p[1]) {
 		case "FuryAttack":
 			this.ability = new FuryAttack();
+			break;
 		case "Absorb":
 			this.ability = new Absorb();
+			break;
 		case "FireSpin":
 			this.ability = new FireSpin();
+			break;
 		case "Bubble":
 			this.ability = new Bubble();
+			break;
 		case "Tackle":
 			this.ability = new Tackle();
+			break;
 		case "DragonRage":
 			this.ability = new DragonRage();
+			break;
 		case "MegaDrain":
 			this.ability = new MegaDrain();
+			break;
 		case "Ember":
 			this.ability = new Ember();
+			break;
 		case "WaterGun":
 			this.ability = new WaterGun();
+			break;
 		case "QuickAttack":
 			this.ability = new QuickAttack();
+			break;
 		case "ThunderShock":
 			this.ability = new ThunderShock();
+			break;
 		case "DragonBreath":
 			this.ability = new DragonBreath();
+			break;
 		case "Confusion":
 			this.ability = new Confusion();
+			break;
 		case "Bite":
 			this.ability = new Bite();
+			break;
 		case "Healer":
 			this.ability = new Healer();
+			break;
 		case "RazorLeaf":
 			this.ability = new RazorLeaf();
+			break;
 		case "FirePunch":
 			this.ability = new FirePunch();
+			break;
 		case "Waterfall":
 			this.ability = new Waterfall();
+			break;
 		case "ThunderPunch":
 			this.ability = new ThunderPunch();
+			break;
 		case "DragonClaw":
 			this.ability = new DragonClaw();
+			break;
 		case "PsyBeam":
 			this.ability = new PsyBeam();
+			break;
 		case "BodySlam":
 			this.ability = new BodySlam();
+			break;
 		case "PetalDance":
 			this.ability = new PetalDance();
+			break;
 		case "Flamethrower":
 			this.ability = new Flamethrower();
+			break;
 		case "Surf":
 			this.ability = new Surf();
+			break;
 		case "ThunderBolt":
 			this.ability = new ThunderBolt();
+			break;
 		case "Outrage":
 			this.ability = new Outrage();
+			break;
 		case "Psychic":
 			this.ability = new Psychic();
+			break;
 		}		
 		
 		this.position = new Position(Integer.parseInt(p[2]), Integer.parseInt(p[3]), Integer.parseInt(p[4]));
@@ -110,12 +138,15 @@ public class TechnicalRecordActive extends TechnicalRecord {
 	}
 	
 	@Override
-	public void useItem(Pokemon target) {
+	public boolean useItem(Pokemon target) {
 		// TODO Auto-generated method stub
 		if(ability.canLearn(target)) {
-			target.teachAbility(ability);
+			boolean a = target.teachAbility(ability);
+			return a;
+		}else {
+			System.out.println("Nao foi possivel ensinar a habilidade " + ability.getName()+"!");
+			return false;
 		}
-		//Usar método do gustavo para printar erro.
 	}
 	
 }

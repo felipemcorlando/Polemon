@@ -25,12 +25,16 @@ public class TechnicalRecordPassive extends TechnicalRecord {
 		switch(p[1]) {
 		case "Bersek":
 			this.ability = new Bersek();
+			break;
 		case "FlameBody":
 			this.ability = new FlameBody();
+			break;
 		case "Intimidate":
 			this.ability = new Intimidate();
+			break;
 		case "SheerForce":
 			this.ability = new SheerForce();
+			break;
 		}		
 		
 		this.position = new Position(Integer.parseInt(p[2]), Integer.parseInt(p[3]), Integer.parseInt(p[4]));
@@ -38,12 +42,15 @@ public class TechnicalRecordPassive extends TechnicalRecord {
 	}
 	
 	@Override
-	public void useItem(Pokemon target) {
+	public boolean useItem(Pokemon target) {
 		// TODO Auto-generated method stub
 		if(ability.canLearn(target)) {
-			target.teachAbility(ability);
+			boolean a = target.teachAbility(ability);
+			return a;
+		}else {
+			System.out.println("Nao foi possivel ensinar a habilidade " + ability.getName()+"!");
+			return false;
 		}
-		//Usar método do gustavo para printar erro.
 	}
 
 }
