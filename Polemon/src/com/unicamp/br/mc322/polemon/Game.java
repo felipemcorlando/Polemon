@@ -451,7 +451,7 @@ public class Game {
 				if(acumuladora == 1)
 					System.out.println("Primeira tentativa de captura falhou!");
 				else
-					System.out.println("Segunda tenttiva de captura falhou! "+target.getName()+" se tornou hostil!");
+					System.out.println("Segunda tentativa de captura falhou! "+target.getName()+" se tornou hostil!");
 			}
 		}
 		return false;
