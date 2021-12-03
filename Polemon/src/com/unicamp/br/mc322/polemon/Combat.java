@@ -26,6 +26,11 @@ public class Combat {
 		System.out.println("-----------------------------------------");
 		System.out.println("COMBAT MODE:");
 		System.out.println("Player vs "+this.targetPokemon.getName());
+		if(this.player.getActivatedPokemon().findPassiveAbility("Bersek")) //Checando as passivas do pokemon do player.
+			for(IPassiveAbility p : this.player.getActivatedPokemon().getPassives()) {
+				if(p.getName() == "Bersek")
+					p.useHability(0, this.player.getActivatedPokemon(), targetPokemon);
+			}
 		while (player.getActivatedPokemon().getHp()>0 && targetPokemon.getHp()>0) {
 			System.out.println("->Your: "+this.player.getActivatedPokemon().toString());
 			System.out.println("->Target: "+this.targetPokemon.toString()+"\n");
@@ -100,7 +105,11 @@ public class Combat {
 		if (i == 1)
 			System.out.println(" No abilities!");
 		
-
+		if(this.player.getActivatedPokemon().findPassiveAbility("Bersek")) //Checando as passivas do pokemon do player.
+			for(IPassiveAbility p : this.player.getActivatedPokemon().getPassives()) {
+				if(p.getName() == "Bersek")
+					p.useHability(0, this.player.getActivatedPokemon(), targetPokemon);
+			}
 		int command;
 		do {
 			double damage;
@@ -109,15 +118,37 @@ public class Combat {
 			System.out.println();
 			if(command==0) {
 				damage = baseAttack(this.player.getActivatedPokemon(),this.targetPokemon);
+				if(this.player.getActivatedPokemon().findPassiveAbility("SheerForce")) //Checando as passivas do pokemon do player.
+					for(IPassiveAbility p : this.player.getActivatedPokemon().getPassives()) {
+						if(p.getName() == "SheerForce") {
+							damage = p.useHability(damage, this.player.getActivatedPokemon(), targetPokemon);
+						}
+					}
 				this.targetPokemon.setHp(this.targetPokemon.getHp()-damage);
 				System.out.println("+You damaged "+this.targetPokemon.getName()+" by "+damage+" hp!");
+				if(this.player.getActivatedPokemon().findPassiveAbility("Bersek")) //Checando as passivas do pokemon do player.
+					for(IPassiveAbility p : this.player.getActivatedPokemon().getPassives()) {
+						if(p.getName() == "Bersek")
+							p.useHability(0, this.player.getActivatedPokemon(), targetPokemon);
+					}
 				return;
 			}
 			
 			if (command < i && command > 0) {
 				damage = abs.get(i-2).useHability(this.player.getActivatedPokemon(), this.targetPokemon);
+				if(this.player.getActivatedPokemon().findPassiveAbility("SheerForce")) //Checando as passivas do pokemon do player.
+					for(IPassiveAbility p : this.player.getActivatedPokemon().getPassives()) {
+						if(p.getName() == "SheerForce") {
+							damage = p.useHability(damage, this.player.getActivatedPokemon(), targetPokemon);
+						}
+					}
 				this.targetPokemon.setHp(this.targetPokemon.getHp()-damage);
 				System.out.println("+You damaged "+this.targetPokemon.getName()+" by "+damage+" hp!");
+				if(this.player.getActivatedPokemon().findPassiveAbility("Bersek")) //Checando as passivas do pokemon do player.
+					for(IPassiveAbility p : this.player.getActivatedPokemon().getPassives()) {
+						if(p.getName() == "Bersek")
+							p.useHability(0, this.player.getActivatedPokemon(), targetPokemon);
+					}
 				return;
 			}
 		}
@@ -127,7 +158,20 @@ public class Combat {
 	
 	public void pokemonAttack() {
 		double damage = baseAttack(this.targetPokemon,this.player.getActivatedPokemon());
+		if(this.player.getActivatedPokemon().findPassiveAbility("Intimidate") || this.player.getActivatedPokemon().findPassiveAbility("FlameBody")) //Checando as passivas do pokemon do player.
+			for(IPassiveAbility p : this.player.getActivatedPokemon().getPassives()) {
+				if(p.getName() == "Intimidate") {
+					damage = p.useHability(damage, this.player.getActivatedPokemon(), targetPokemon);
+				}if(p.getName() == "FlameBody") {
+					p.useHability(damage, this.player.getActivatedPokemon(), targetPokemon);
+				}
+			}
 		this.player.getActivatedPokemon().setHp(this.player.getActivatedPokemon().getHp()-damage);
+		if(this.player.getActivatedPokemon().findPassiveAbility("Bersek")) //Checando as passivas do pokemon do player.
+			for(IPassiveAbility p : this.player.getActivatedPokemon().getPassives()) {
+				if(p.getName() == "Bersek")
+					p.useHability(0, this.player.getActivatedPokemon(), targetPokemon);
+			}
 		if (!this.playerShift)
 			System.out.println();
 			
