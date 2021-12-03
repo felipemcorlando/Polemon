@@ -6,11 +6,11 @@ public class PokemonBag {
 
 	private ArrayList<Pokemon> pokemonList = new ArrayList<Pokemon>();
 	
-	public void addItem(Pokemon pokemon) {
+	public void addPokemon(Pokemon pokemon) {
 		this.pokemonList.add(pokemon);
 	}
 	
-	public void removeItem(Pokemon pokemon) {
+	public void removePokemon(Pokemon pokemon) {
 		this.pokemonList.remove(pokemon);
 	}
 	
@@ -18,7 +18,7 @@ public class PokemonBag {
 		return this.pokemonList;
 	}
 	
-	public Pokemon getItem(String name) {
+	public Pokemon getPokemon(String name) {
 		Pokemon pokemon = null;
 		for(Pokemon p : this.pokemonList) {
 			if(p.getName() == name) {
@@ -31,7 +31,7 @@ public class PokemonBag {
 	public String toString() {
 		String s = "";
 		for(Pokemon p : this.pokemonList) {
-			s = s + p.getName()+ " ";
+			s = s + p.getName()+ "("+p.getHp()+"HP) ";
 		}
 		return s;
 	}
