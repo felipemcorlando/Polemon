@@ -15,4 +15,6 @@ public interface Collectable {
 	
 	public String getName();
 	
+	public String toString(int i);
+	
 }

@@ -53,4 +53,10 @@ public class TechnicalRecordPassive extends TechnicalRecord {
 		}
 	}
 
+	@Override
+	public String toString(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

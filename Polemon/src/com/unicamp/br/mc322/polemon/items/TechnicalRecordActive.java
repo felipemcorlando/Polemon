@@ -148,5 +148,12 @@ public class TechnicalRecordActive extends TechnicalRecord {
 			return false;
 		}
 	}
+
+	@Override
+	public String toString(int i) {
+		// TODO Auto-generated method stub
+		String s = this.name+"()";
+		return s;
+	}
 	
 }

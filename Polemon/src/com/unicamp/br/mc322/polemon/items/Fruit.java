@@ -57,4 +57,10 @@ public class Fruit implements Collectable{
 		return 'F';
 	}
 
+	@Override
+	public String toString(int i) {
+		// TODO Auto-generated method stub
+		return this.toString();
+	}
+
 }
