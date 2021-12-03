@@ -166,7 +166,7 @@ public class Game {
 
 		ArrayList<Collectable> itens = island.getItens();
 		for (Collectable item : itens)
-			table[item.getPosition().getX()-xOffset][item.getPosition().getY()-yOffset] = 'I'; //item.getChar();
+			table[item.getPosition().getX()-xOffset][item.getPosition().getY()-yOffset] = item.getChar();
 
 		ArrayList<Mappable> places = island.getMoveObjects();
 		for (Mappable map : places) 
