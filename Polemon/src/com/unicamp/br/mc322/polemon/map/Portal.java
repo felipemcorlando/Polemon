@@ -31,7 +31,7 @@ public class Portal implements Mappable {
 		}
 		System.out.println("\nChoose one island :");
 		for (Island aux : visitedIslands) {
-			System.out.print(visitedIslands.indexOf(aux)+"-");
+			System.out.print((visitedIslands.indexOf(aux)+1)+"-");
 			aux.getLowInfo();
 			//System.out.println("Press "+visitedIslands.indexOf(aux));
 		}

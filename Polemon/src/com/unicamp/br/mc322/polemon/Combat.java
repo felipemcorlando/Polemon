@@ -1,5 +1,9 @@
 package com.unicamp.br.mc322.polemon;
 
+import com.unicamp.br.mc322.polemon.abilities.*;
+import com.unicamp.br.mc322.polemon.abilities.active.*;
+import com.unicamp.br.mc322.polemon.abilities.passive.*;
+
 import java.util.ArrayList;
 
 public class Combat {
@@ -20,30 +24,32 @@ public class Combat {
 	public void drawCombat () {
 		Game.cleanScreen();
 		System.out.println("-----------------------------------------");
-		System.out.println("COMBAT MODE: Player vs "+this.targetPokemon.getName());
+		System.out.println("COMBAT MODE:");
+		System.out.println("Player vs "+this.targetPokemon.getName());
 		while (player.getActivatedPokemon().getHp()>0 && targetPokemon.getHp()>0) {
-			System.out.println("Actual Pokemon: "+this.player.getActivatedPokemon().toString()+"\n");
-			shift(player,targetPokemon,playerShift);
+			System.out.println("  Your: "+this.player.getActivatedPokemon().toString());
+			System.out.println("  Target: "+this.targetPokemon.toString()+"\n");
+			this.shift();
 		}
 		
 		this.player.setInCombat(false);
 	}
 	
-	public void shift(Player pl, Pokemon po, boolean playerShift) {//turno de ataque
-		if (playerShift) {
+	public void shift() {//turno de ataque
+		if (this.playerShift) {
 
 			//player ataca primeiro 
-			playerAttack(pl,po);
-			if(po.getHp()<1)
+			this.playerAttack();
+			if(this.targetPokemon.getHp()<1)
 				return;
 			else
-				pokemonAttack(pl,po);
+				this.pokemonAttack();
 		}
 		else {
 			//pokemon ataca primeiro
-			pokemonAttack(pl,po);
-			if(pl.getActivatedPokemon().getHp()<1) {
-				if(!pl.checkPokemonsLife())
+			this.pokemonAttack();
+			if(this.player.getActivatedPokemon().getHp()<1) {
+				if(!this.player.checkPokemonsLife())
 					return;
 				System.out.println("Choose one pokemon:");
 				ArrayList<Pokemon> pb = this.player.getMinePokemons().getPokemonList();
@@ -62,36 +68,51 @@ public class Combat {
 					e.getMessage();
 				}
 			}
-			playerAttack(pl,po);
+			this.playerAttack();
 		}
 	}
 	
-	public void playerAttack(Player pl, Pokemon po) {
+	public void playerAttack() {
 		System.out.println("Your turn! Choose one action:");
 		System.out.println(" 0 - Base attack");
-		System.out.println(" 1 - Choose one ability");
-		int command = Integer.parseInt(Input.readKeyboard());
-		while(command !=0 || command !=1) {
-			System.out.println("Invalid Command , try again : ");
-			command = Integer.parseInt(Input.readKeyboard());
+		System.out.println(" Abilities:");
+		int i = 1;
+		ArrayList<IActiveAbility> abs = this.player.getActivatedPokemon().getActives();
+		
+		for (IActiveAbility a : abs) {
+			System.out.println(i+" - "+a.getName());
+			i++;
 		}
 		
-		if(command==0) {
-			po.setHp(po.getHp()-baseAttack(pl.getActivatedPokemon(),po));
-			return;
-		}
-		else {
-			System.out.println("Available abilities : ");
-			//pl.getActivatedPokemon().getAbilitiesInfo();
-			System.out.println("Choose one : ");
+		if (i == 1)
+			System.out.println(" No abilities!");
+		
+
+		int command;
+		do {
+			double damage;
+			System.out.print("Your Action: ");
 			command = Integer.parseInt(Input.readKeyboard());
-			double damage = pl.getActivatedPokemon().getActiveAbility(command).useHability(pl.getActivatedPokemon(), po);
-			po.setHp(po.getHp()-damage);
-		}		
+			if(command==0) {
+				damage = baseAttack(this.player.getActivatedPokemon(),this.targetPokemon);
+				this.targetPokemon.setHp(this.targetPokemon.getHp()-damage);
+				System.out.println("You damaged "+this.targetPokemon.getName()+" by "+damage+" hp!");
+				return;
+			}
+			
+			if (command < i && command > 0) {
+				damage = abs.get(i-1).useHability(this.player.getActivatedPokemon(), this.targetPokemon);
+				this.targetPokemon.setHp(this.targetPokemon.getHp()-damage);
+				System.out.println("You damaged "+this.targetPokemon.getName()+" by "+damage+" hp!");
+				return;
+			}
+		}
+		while (command >= i || command < 0); //Input errado
+		
 	}
 	
-	public void pokemonAttack(Player pl, Pokemon po) {
-		pl.getActivatedPokemon().setHp(pl.getActivatedPokemon().getHp()-baseAttack(po,pl.getActivatedPokemon()));
+	public void pokemonAttack() {
+		this.player.getActivatedPokemon().setHp(this.player.getActivatedPokemon().getHp()-baseAttack(this.targetPokemon,this.player.getActivatedPokemon()));
 	}
 	
 	public double baseAttack(Pokemon attacker , Pokemon defensor ) {

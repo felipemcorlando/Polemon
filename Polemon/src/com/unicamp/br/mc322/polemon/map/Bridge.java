@@ -24,10 +24,12 @@ public class Bridge implements Mappable {
 		Position playerPosition = player.getGlobalPosition();
 		Island actualIsland=player.getActualIsland();
 		if (actualIsland.getPosition().getX()<position.getX()) {
-			player.setGlobalPosition(playerPosition.travel((new Position(1,0,0))));
+			//player.setGlobalPosition(playerPosition.travel((new Position(1,0,0))));
+			player.setGlobalPosition(playerPosition.travel(1,0,0));
 		}
 		else {
-			player.setGlobalPosition(playerPosition.travel((new Position(-1,0,0))));
+			//player.setGlobalPosition(playerPosition.travel((new Position(-1,0,0))));
+			player.setGlobalPosition(playerPosition.travel(-1,0,0));
 		}
 		
 	}

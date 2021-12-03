@@ -1,5 +1,4 @@
 package com.unicamp.br.mc322.polemon;
-
 import com.unicamp.br.mc322.polemon.items.*;
 import com.unicamp.br.mc322.polemon.map.*;
 
@@ -121,9 +120,13 @@ public class Game {
 					}
 					break;
 				case "4":
-					//Pokemon target = this.chooseAvailablePokemons();
-					//if (target != null)
-						//this.capturePokemon(target);
+					//Pokemon t = this.chooseAvailablePokemons();
+					//if (t != null) {
+						//if (!this.capturePokemon(t)) { //nao deu certo, entra no modo combat
+							//Combat newCombat = new Combat(this.player, t, false);
+							//newCombat.drawCombat();
+						//}
+					//}
 						break;
 				case "5":
 					this.movements = Dice.roll(6,2);
@@ -369,6 +372,8 @@ public class Game {
 				return null;
 
 			int choice = Integer.parseInt(str);
+			//verificar erro qnd soh o 2o da lista de pokemons esta no range
+			//o programa pega o outro pokemon q nao está no range
 			return l.get(choice-1);
 
 		} catch (Exception e) {
