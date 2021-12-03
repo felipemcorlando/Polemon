@@ -80,7 +80,8 @@ public class Combat {
 			pl.getActivatedPokemon().getAbilitiesInfo();
 			System.out.println("Choose one : ");
 			command = Integer.parseInt(Input.readKeyboard());
-			// preciso ver com o felipe como vai funcionar o usar habilidade
+			double damage = pl.getActivatedPokemon().getActiveAbility(command).useHability(pl.getActivatedPokemon(), po);
+			po.setHp(po.getHp()-damage);
 		}		
 	}
 	
