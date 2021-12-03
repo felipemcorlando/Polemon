@@ -32,4 +32,10 @@ public class Fruit implements Collectable{
 		return name;
 	}
 
+	@Override
+	public char getChar() {
+		// TODO Auto-generated method stub
+		return 'F';
+	}
+
 }

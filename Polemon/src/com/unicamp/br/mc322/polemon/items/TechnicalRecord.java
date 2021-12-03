@@ -17,6 +17,10 @@ public abstract class TechnicalRecord implements Collectable {
 	public String getName() {
 		return name;
 	}
-
+	
+	public char getChar() {
+		// TODO Auto-generated method stub
+		return 'T';
+	}
 	
 }
