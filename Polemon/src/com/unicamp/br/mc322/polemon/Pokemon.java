@@ -84,19 +84,25 @@ public class Pokemon {
 		}
 	}
 	
-	public void teachAbility(IActiveAbility newAb) {
-		if(this.findActiveAbility(newAb.getName()) == false)
+	public boolean teachAbility(IActiveAbility newAb) {
+		if(this.findActiveAbility(newAb.getName()) == false) {
 			this.activeAbilities.add(newAb);
-		else {
-			//Não foi possivel add newAb;
+			System.out.println("Foi possivel ensinar a habilidade " + newAb.getName()+"!");
+			return true;
+		}else {
+			System.out.println("Nao foi possivel ensinar a habilidade " + newAb.getName()+"!");
+			return false;
 		}
 	}
 	
-	public void teachAbility(IPassiveAbility newAb) {
-		if(this.findPassiveAbility(newAb.getName()) == false)
-		this.passiveAbilities.add(newAb);
-		else {
-			//Não foi possivel add newAb;
+	public boolean teachAbility(IPassiveAbility newAb) {
+		if(this.findPassiveAbility(newAb.getName()) == false) {
+			this.passiveAbilities.add(newAb);
+			System.out.println("Foi possivel ensinar a habilidade " + newAb.getName()+"!");
+			return true;
+		}else {
+			System.out.println("Nao foi possivel ensinar a habilidade " + newAb.getName()+"!");
+			return false;
 		}
 	}
 	
