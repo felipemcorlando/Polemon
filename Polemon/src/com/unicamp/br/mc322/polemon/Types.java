@@ -21,4 +21,23 @@ public enum Types {
 			return null;
 		}
 	}
+	
+	public String toString(Types t) {
+		switch(t) {
+		case FIRE:
+			return "Fire";
+		case WATER:
+			return "Water";
+		case GRASS:
+			return "Grass";
+		case ELECTRIC:
+			return "Electric";
+		case PSYCHIC:
+			return "Psychic";
+		case DRAGON:
+			return "Dragon";
+		default:
+			return null;
+		}
+	}
 }
