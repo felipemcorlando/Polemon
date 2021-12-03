@@ -15,6 +15,16 @@ public class Fruit implements Collectable{
 		this.healQtd = healQtd;
 	}
 	
+	public Fruit (String register) {
+		String[] p = register.split(" ");
+		this.name = p[0];	
+		
+		this.healQtd = Integer.parseInt(p[1]);
+		
+		this.position = new Position(Integer.parseInt(p[2]), Integer.parseInt(p[3]), Integer.parseInt(p[4]));
+		
+	}
+	
 	@Override
 	public void useItem(Pokemon target) {
 		// TODO Auto-generated method stub

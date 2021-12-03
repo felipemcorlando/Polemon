@@ -1,33 +1,32 @@
-CheriBerry 5
-ChestoBerry 5
-PechaBerry 5
-RawstBerry 7
-AspearBerry 7
-LeppaBerry 10
-OranBerry 10
-PersimBerry 10
-LumBerry 13
-SitrusBerry 15
-FigyBerry 15
-WikiBerry 15
-MagoBerry 17
-AguavBerry 17
-IapapaBerry 20
-RazzBerry 20
-BlukBerry 20
-NanabBerry 23
-WepearBerry 23
-PinapBerry 25
-PormegBerry 25
-KelpsyBerry 25
-QualotBerry 30
-GrepaBerry 30
-TamatoBerry 33
-CornnBerry 35
-MagostBerry 37
-RabutaBerry 39
-NormelBerry 40
-SpelonBerry 40
-PamtreBerry 40
-OccaBerry 45
-//Não esta completo ainda***
+CheriBerry 5 4 2 0
+ChestoBerry 5 7 8 0
+PechaBerry 5 12 3 0
+RawstBerry 7 15 6 0
+AspearBerry 7 22 3 0
+LeppaBerry 10 19 7 0
+OranBerry 10 30 7 0
+PersimBerry 10 35 4 0
+LumBerry 13 1 4 1
+SitrusBerry 15 7 2 1
+FigyBerry 15 15 2 1
+WikiBerry 15 10 6 1
+MagoBerry 17 23 2 1
+AguavBerry 17 25 8 1
+IapapaBerry 20 33 1 1
+RazzBerry 20 29 7 1
+BlukBerry 20 5 7 2
+NanabBerry 23 7 3 2
+WepearBerry 23 13 2 2
+PinapBerry 25 12 6 2
+PormegBerry 25 24 2 2
+KelpsyBerry 25 25 6 2
+QualotBerry 30 29 7 2
+GrepaBerry 30 35 1 2
+TamatoBerry 33 1 7 3
+CornnBerry 35 7 8 3
+MagostBerry 37 15 2 3
+RabutaBerry 39 12 8 3
+NormelBerry 40 23 1 3
+SpelonBerry 40 19 8 3
+PamtreBerry 40 29 1 3
+OccaBerry 45 34 2 3
