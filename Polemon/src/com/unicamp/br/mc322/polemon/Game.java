@@ -116,7 +116,10 @@ public class Game {
 					if (target != null) {
 						this.player.setInCombat(true);
 						Combat newCombat = new Combat(this.player, target, true);
-						newCombat.drawCombat();
+						if (newCombat.runCombat()) {
+							//ganhou o combate, perguntar se quer add na bag
+						}
+							
 					}
 					break;
 				case "4":
@@ -124,7 +127,7 @@ public class Game {
 					//if (t != null) {
 						//if (!this.capturePokemon(t)) { //nao deu certo, entra no modo combat
 							//Combat newCombat = new Combat(this.player, t, false);
-							//newCombat.drawCombat();
+							//newCombat.runCombat();
 						//}
 					//}
 						break;
@@ -407,8 +410,7 @@ public class Game {
 
 	private void healPokemons() {
 		for (Pokemon p : this.player.getMinePokemons().getPokemonList())
-			if (p.getInitialHp() > p.getHp())
-				p.setHp(p.getHp()+1);
+			p.setHp(p.getHp()+1);
 	}
 
 }
