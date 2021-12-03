@@ -120,9 +120,11 @@ public class Game {
 							//ganhou o combate, perguntar se quer add na bag
 							System.out.println("\n"+target.getName()+" fainted. Do you want to add to your bag?\n1-YES 2-NO : ");
 							int c = Integer.parseInt(Input.readKeyboard().substring(0,1));
-							if (c == 1)
+							if (c == 1) {
+								target.setHp(target.getInitialHp());
 								this.player.getMinePokemons().addPokemon(target);
-							
+								
+							}
 							this.wildPokemons.remove(target);
 							this.getPlayerActualIsland().getPokemons().remove(target);
 							
