@@ -121,7 +121,7 @@ public class Game {
 							System.out.println("\n"+target.getName()+" fainted. Do you want to add to your bag?\n1-YES 2-NO : ");
 							int c = Integer.parseInt(Input.readKeyboard().substring(0,1));
 							if (c == 1)
-								this.player.getMinePokemons().addItem(target);
+								this.player.getMinePokemons().addPokemon(target);
 							
 							this.wildPokemons.remove(target);
 							this.getPlayerActualIsland().getPokemons().remove(target);
@@ -137,14 +137,14 @@ public class Game {
 				case "4":
 					Pokemon tar = this.chooseAvailablePokemons();
 					if (tar != null) {
-						//if (!this.capturePokemon(tar)) { //nao deu certo, entra no modo combat
+						if (!this.capturePokemon(tar)) { //nao deu certo, entra no modo combat
 							Combat newCombat = new Combat(this.player, tar, false);
 							if (newCombat.runCombat()) {
 								//ganhou o combate, perguntar se quer add na bag
 								System.out.println(tar.getName()+" fainted. Do you want to add to your bag?\n1-YES 2-NO : ");
 								int c = Integer.parseInt(Input.readKeyboard().substring(0,1));
 								if (c == 1)
-									this.player.getMinePokemons().addItem(tar);
+									this.player.getMinePokemons().addPokemon(tar);
 
 								this.wildPokemons.remove(tar);
 								this.getPlayerActualIsland().getPokemons().remove(tar);
@@ -153,7 +153,8 @@ public class Game {
 								System.out.println("GAME OVER!!!");
 								this.exitSelected = true;
 							}
-						//}
+						//
+						}
 					}
 						break;
 				case "5":
@@ -397,7 +398,7 @@ public class Game {
 
 			int choice = Integer.parseInt(str);
 			//verificar erro qnd soh o 2o da lista de pokemons esta no range
-			//o programa pega o outro pokemon q nao está no range
+			//o programa pega o outro pokemon q nao estï¿½ no range
 			return l.get(choice-1);
 
 		} catch (Exception e) {
@@ -428,10 +429,25 @@ public class Game {
 	}
 
 	public boolean capturePokemon(Pokemon target) {
-		//implementar tentativa de captura do pokemon
 		//true se capturou
-		//false se nao, então vai comecar um combat (no updateGame)
-		return true;
+		//false se nao capturou em 2 tentativas no max, entao vai comecar um combate (no updateGame)
+		int pokemon = target.getD()+target.getK(), acumuladora = 0;
+		while(acumuladora < 2) {
+			int player = Dice.roll(6, 2);
+			if(player > pokemon) { //Pokemon capturado.
+				this.player.capturePokemon(target);
+				System.out.println(target.getName()+" capturado!");
+				this.getPlayerActualIsland().getPokemons().remove(target);
+				return true;
+			}else { //Tentativa falha de captura
+				acumuladora += 1;
+				if(acumuladora == 1)
+					System.out.println("Primeira tentativa de captura falhou!");
+				else
+					System.out.println("Segunda tenttiva de captura falhou! "+target.getName()+" se tornou hostil!");
+			}
+		}
+		return false;
 	}
 
 	private void healPokemons() {
