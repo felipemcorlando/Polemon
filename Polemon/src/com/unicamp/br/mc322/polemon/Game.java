@@ -1,4 +1,5 @@
 package com.unicamp.br.mc322.polemon;
+
 import com.unicamp.br.mc322.polemon.items.*;
 import com.unicamp.br.mc322.polemon.map.*;
 
@@ -27,6 +28,7 @@ public class Game {
 
 		this.player = new Player(initialPos, p1, i1);
 		this.loadPokemons("src/com/unicamp/br/mc322/polemon/PokemonInstancesInfo");
+		this.loadCollectables();
 		this.movements = 0;
 	}
 
@@ -222,7 +224,31 @@ public class Game {
 		}
 	}
 
-	private void loadCollectables() {}
+	private void loadCollectables() {
+		this.loadFruits("src/com/unicamp/br/mc322/polemon/items/FruitInstancesInfo");
+		this.loadTRActive("src/com/unicamp/br/mc322/polemon/items/TRActiveInstancesInfo");
+		this.loadTRPassive("src/com/unicamp/br/mc322/polemon/items/TRPassiveInstancesInfo");
+	}
+	
+	private void loadFruits(String path) {
+		for (int i = 0; i < Input.countLines(path); i++) {
+			Fruit f = new Fruit(Input.readLineFromFile(path, i));
+			getIslandByPosition(f.getPosition()).addCollectable(f);
+		}
+	}
+	
+	private void loadTRActive(String path) {
+		for (int i = 0; i < Input.countLines(path); i++) {
+			TechnicalRecordActive t = new TechnicalRecordActive(Input.readLineFromFile(path, i));
+			getIslandByPosition(t.getPosition()).addCollectable(t);
+		}
+	}
+	private void loadTRPassive(String path) {
+		for (int i = 0; i < Input.countLines(path); i++) {
+			TechnicalRecordPassive t = new TechnicalRecordPassive(Input.readLineFromFile(path, i));
+			getIslandByPosition(t.getPosition()).addCollectable(t);
+		}
+	}
 
 	//Use methods
 	private void useMappable (Island last) {
