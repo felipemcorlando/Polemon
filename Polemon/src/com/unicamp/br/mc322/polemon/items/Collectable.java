@@ -7,6 +7,8 @@ public interface Collectable {
 
 	public void useItem(Pokemon target);
 	
+	public char getChar();
+	
 	public Position getPosition();
 	
 	public String getName();
