@@ -1,5 +1,7 @@
 package com.unicamp.br.mc322.polemon;
 
+import java.util.ArrayList;
+
 public class Combat {
 
 	private Player player;
@@ -37,9 +39,25 @@ public class Combat {
 			//pokemon ataca primeiro
 			pokemonAttack(pl,po);
 			if(pl.getActivatedPokemon().getHp()<1) {
-				//Ver com Gu como mudaremos o pokemon pensando no index do pokemon bag , o pokemon ativo sempre deve ser o primeiro ?
+				if(!pl.checkPokemonsLife())
+					return;
+				System.out.println("Choose one pokemon:");
+				ArrayList<Pokemon> pb = this.player.getMinePokemons().getPokemonList();
+				for (int i = 0; i < pb.size(); i++) 
+					System.out.println((i+1)+" - "+pb.get(i));
+
+				try {
+					String str = Input.readKeyboard();
+					if (str == "")
+						return;
+
+					int choice = Integer.parseInt(str);
+					this.player.choosePokemon(choice-1);
+
+				} catch (Exception e) {
+					e.getMessage();
+				}
 			}
-			//adicionar um check player.getActivatedPokemon().getHp()>0
 			playerAttack(pl,po);
 		}
 	}
@@ -50,7 +68,7 @@ public class Combat {
 		int command = Integer.parseInt(Input.readKeyboard());
 		while(command !=0 || command !=1) {
 			System.out.println("Invalid Command , try again : ");
-			command = Integer.parseInt(Input.readKeyboard())
+			command = Integer.parseInt(Input.readKeyboard());
 		}
 		
 		if(command==0) {
