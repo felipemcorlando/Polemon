@@ -22,10 +22,14 @@ public class Bersek implements IPassiveAbility {
 		if(ativada == false) {
 			if(self.getHp() < self.getInitialHp()/2) {
 				self.setAttackPoints(self.getAttackPoints()*2); //Dobra os AttackPoints do pokemon se tiver com a vida reduzida;
+				ativada = true;
+				System.out.println("Bersek Activated, Pokemon Attack Points buffed!");
 			}
 		}else {
 			if(self.getHp() >= self.getInitialHp()/2) {
-				self.setAttackPoints(self.getAttackPoints()/2); //Reverte a passiva.
+				self.setAttackPoints(self.getAttackPoints()/2); //Reverte a passiva.]
+				ativada = false;
+				System.out.println("Bersek Dectivated, Pokemon Attack Points debuffed!");
 			}
 		}
 		return d;

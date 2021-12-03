@@ -30,6 +30,7 @@ public class FlameBody implements IPassiveAbility {
 			Random rand = new Random();
 			if(rand.nextInt(100) < this.accuracy) {
 				opponent.setHp(opponent.getHp()-this.damage);
+				System.out.println("5 damage caused by FlameBody");
 			}
 		}
 		return d;

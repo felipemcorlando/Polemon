@@ -19,8 +19,8 @@ public class SheerForce implements IPassiveAbility {
 	@Override
 	public double useHability(double d,Pokemon self, Pokemon opponent) {
 		// TODO Auto-generated method stub
-		d = d + d*0.3;
-		return d;
+		System.out.println("Damage buff by SheerForce!");
+		return d*1.3;
 	}
 
 	@Override

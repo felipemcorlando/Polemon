@@ -7,7 +7,7 @@ import com.unicamp.br.mc322.polemon.Types;
 
 public class Intimidate implements IPassiveAbility {
 
-	private String name = "FlameBody"; //Reduz todos os danos recebidos por outros pokemons de 50%, exceto danos recebidos de outros pokemon Psychic.
+	private String name = "Intimidate"; //Reduz todos os danos recebidos por outros pokemons de 50%, exceto danos recebidos de outros pokemon Psychic.
 	private ArrayList<Types> typesAllowed = new ArrayList<Types>();
 	
 	public Intimidate() {
@@ -20,10 +20,12 @@ public class Intimidate implements IPassiveAbility {
 	public double useHability(double d,Pokemon self, Pokemon opponent) {
 		// TODO Auto-generated method stub
 		for(Types t : opponent.getPokemonType()) {
-			if(t == Types.PSYCHIC); //Se for PSYCHIC d = d e retorna;
+			if(t == Types.PSYCHIC) { //Se for PSYCHIC d = d e retorna;
 				return d;
+			}
 		}
-		return d/2; //Caso contrario d = d/2 e retorna;
+		System.out.println("Damage reduced by Intimidate");
+		return (d/2); //Caso contrario d = d/2 e retorna;
 	}
 
 	@Override

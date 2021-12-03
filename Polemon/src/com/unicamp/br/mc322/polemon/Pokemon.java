@@ -188,6 +188,11 @@ public class Pokemon {
 	}
 	
 	public String toString() {
+		if(this.findPassiveAbility("Bersek")) //Checando as passivas do pokemon do player.
+			for(IPassiveAbility p : this.getPassives()) {
+				if(p.getName() == "Bersek")
+					p.useHability(0, this, null);
+			}
 		if (this.hp <= 0) //desmaiado
 			return this.name + " X-X";
 		else
