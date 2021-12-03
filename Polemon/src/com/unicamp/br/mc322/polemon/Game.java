@@ -41,10 +41,13 @@ public class Game {
 			this.drawBoard();
 			String command = this.readInput();
 			this.updateGame(command);
-			//checar condi��o de vit�ria
+			if (this.wildPokemons.isEmpty()) {
+				System.out.println("CONGRATS! You won the Polemon Game!");
+				break;
+			}
+				
 		}
 		System.out.println("Game terminated. Bye!");
-
 	}
 
 	private String readInput() {
@@ -123,8 +126,8 @@ public class Game {
 							if (c == 1) {
 								target.setHp(target.getInitialHp());
 								this.player.getMinePokemons().addPokemon(target);
-								
 							}
+							
 							this.wildPokemons.remove(target);
 							this.getPlayerActualIsland().getPokemons().remove(target);
 							
