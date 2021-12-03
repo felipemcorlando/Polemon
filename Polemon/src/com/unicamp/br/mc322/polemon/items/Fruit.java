@@ -26,9 +26,18 @@ public class Fruit implements Collectable{
 	}
 	
 	@Override
-	public void useItem(Pokemon target) {
+	public boolean useItem(Pokemon target) {
 		// TODO Auto-generated method stub
 		target.setHp(target.getHp()+healQtd);
+		System.out.println("Foi possivel utilizar a fruta "+this.toString()+"!");
+		return true;
+		
+	}
+	
+	@Override
+	public String toString() {
+		String s = this.name+"("+this.healQtd+" HP)";
+		return s;
 	}
 
 	@Override

@@ -5,9 +5,11 @@ import com.unicamp.br.mc322.polemon.Position;
 
 public interface Collectable {
 
-	public void useItem(Pokemon target);
+	public boolean useItem(Pokemon target);
 	
 	public char getChar();
+	
+	public String toString();
 	
 	public Position getPosition();
 	

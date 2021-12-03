@@ -12,6 +12,10 @@ public abstract class TechnicalRecord implements Collectable {
 		// TODO Auto-generated method stub
 		return position;
 	}
+	
+	public String toString() {
+		return this.getName();
+	}
 
 	@Override
 	public String getName() {
