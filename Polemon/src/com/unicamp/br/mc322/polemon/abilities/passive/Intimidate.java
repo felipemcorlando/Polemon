@@ -44,5 +44,15 @@ public class Intimidate implements IPassiveAbility {
 		// TODO Auto-generated method stub
 		return this.name;
 	}
+	
+	@Override
+	public String getTypesAllowed() {
+		// TODO Auto-generated method stub
+		String s = "";
+		for(Types t : this.typesAllowed) {
+			s += t.toString(t)+" ";
+		}
+		return s;
+	}
 
 }

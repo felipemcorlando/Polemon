@@ -10,4 +10,6 @@ public interface IPassiveAbility {
 	
 	public String getName();
 	
+	public String getTypesAllowed();
+	
 }

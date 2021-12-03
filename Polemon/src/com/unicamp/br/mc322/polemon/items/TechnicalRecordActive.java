@@ -152,7 +152,7 @@ public class TechnicalRecordActive extends TechnicalRecord {
 	@Override
 	public String toString(int i) {
 		// TODO Auto-generated method stub
-		String s = this.name+"()";
+		String s = this.name+"("+this.ability.getTypesAllowed()+")";
 		return s;
 	}
 	

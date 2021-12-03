@@ -12,4 +12,6 @@ public interface IActiveAbility {
 	
 	public String toString();
 	
+	public String getTypesAllowed();
+	
 }
