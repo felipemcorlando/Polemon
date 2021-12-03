@@ -18,16 +18,20 @@ public class Combat {
 	}
 	
 	public void drawCombat () {
+		Game.cleanScreen();
+		System.out.println("-----------------------------------------");
+		System.out.println("COMBAT MODE: Player vs "+this.targetPokemon.getName());
 		while (player.getActivatedPokemon().getHp()>0 && targetPokemon.getHp()>0) {
-			shift(player,targetPokemon,playerShift) ;
+			System.out.println("Actual Pokemon: "+this.player.getActivatedPokemon().toString()+"\n");
+			shift(player,targetPokemon,playerShift);
 		}
+		
+		this.player.setInCombat(false);
 	}
-	
-	
-	
 	
 	public void shift(Player pl, Pokemon po, boolean playerShift) {//turno de ataque
 		if (playerShift) {
+
 			//player ataca primeiro 
 			playerAttack(pl,po);
 			if(po.getHp()<1)
@@ -63,8 +67,9 @@ public class Combat {
 	}
 	
 	public void playerAttack(Player pl, Pokemon po) {
-		System.out.println("\nBase attack , Press 0");
-		System.out.println("\nChoose one ability , Press 1");
+		System.out.println("Your turn! Choose one action:");
+		System.out.println(" 0 - Base attack");
+		System.out.println(" 1 - Choose one ability");
 		int command = Integer.parseInt(Input.readKeyboard());
 		while(command !=0 || command !=1) {
 			System.out.println("Invalid Command , try again : ");
@@ -76,8 +81,8 @@ public class Combat {
 			return;
 		}
 		else {
-			System.out.println("Disponible abilities : ");
-			pl.getActivatedPokemon().getAbilitiesInfo();
+			System.out.println("Available abilities : ");
+			//pl.getActivatedPokemon().getAbilitiesInfo();
 			System.out.println("Choose one : ");
 			command = Integer.parseInt(Input.readKeyboard());
 			double damage = pl.getActivatedPokemon().getActiveAbility(command).useHability(pl.getActivatedPokemon(), po);

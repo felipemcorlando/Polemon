@@ -20,7 +20,6 @@ public class Game {
 		this.exitSelected = false;
 		this.loadMappables(4);
 
-		//creating the Player
 		Pokemon p1 = new Pokemon("Totodile",Types.WATER,null,44,50,65,new Position(0,0,0));
 		Position initialPos = new Position(1,1,0); //switch to (1,1,0)
 		Island i1 = this.getIslandByPosition(initialPos);
@@ -112,9 +111,11 @@ public class Game {
 					break;
 				case "3":
 					Pokemon target = this.chooseAvailablePokemons();
-					System.out.println(target.toString());
-					//if (target != null)
-						//this.callCombat(target);
+					if (target != null) {
+						this.player.setInCombat(true);
+						Combat newCombat = new Combat(this.player, target, true);
+						newCombat.drawCombat();
+					}
 					break;
 				case "4":
 					//Pokemon target = this.chooseAvailablePokemons();
@@ -133,7 +134,6 @@ public class Game {
 
 
 		} else { //is in combat mode
-			//Combat newCombat = new Combat(this.player,)
 		}
 	}
 
@@ -166,7 +166,7 @@ public class Game {
 
 		ArrayList<Collectable> itens = island.getItens();
 		for (Collectable item : itens)
-			table[item.getPosition().getX()-xOffset][item.getPosition().getY()-yOffset] = item.getChar();
+			table[item.getPosition().getX()-xOffset][item.getPosition().getY()-yOffset] = 'I'; //item.getChar();
 
 		ArrayList<Mappable> places = island.getMoveObjects();
 		for (Mappable map : places) 
@@ -311,8 +311,10 @@ public class Game {
 	public final static void cleanScreen() {
 		//Jumps 20 lines to 'clear' console
 		for (int i = 0; i < 20; ++i) System.out.println();
+		
 	}
 
+	//Other methods
 	public Pokemon chooseAvailablePokemons() {
 		cleanScreen();
 
@@ -320,7 +322,7 @@ public class Game {
 		int i = 1;
 
 		if (l != null) {
-			System.out.println("Choose one Pokemon available: ");
+			System.out.println("Choose one Pokemon to attack: ");
 			for (Pokemon p : l) {
 				if (this.pokemonInRange(p)) {
 					System.out.println(i+" - "+p.toString());
@@ -349,7 +351,6 @@ public class Game {
 		return null;
 	}
 
-	//Other methods
 	private void choosePokemon() {
 		cleanScreen();
 		System.out.println("Choose one pokemon:");
@@ -371,10 +372,6 @@ public class Game {
 	}
 
 	//public boolean capturePokemon() {	}
-
-	public void callCombat() {
-
-	}
 
 	private void healPokemons() {
 		for (Pokemon p : this.player.getMinePokemons().getPokemonList())
