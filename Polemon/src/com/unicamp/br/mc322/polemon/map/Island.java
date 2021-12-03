@@ -9,12 +9,12 @@ import com.unicamp.br.mc322.polemon.items.Collectable;
 import java.util.Random;
 
 public class Island {
-	private Position position ; // posição superior esquerda ;
+	private Position position ; // posiï¿½ï¿½o superior esquerda ;
 	private Types type ; // tipo da ilha
 	private ArrayList <Pokemon> pokemons;//vetor de pokemons da ilha
 	private ArrayList <Collectable>  itens;//vetor de itens presentes na ilha
 	private int size;// tamanho da ilha 
-	private ArrayList<Mappable> moveObjects;//Obbjetos de mudança de posição
+	private ArrayList<Mappable> moveObjects;//Obbjetos de mudanï¿½a de posiï¿½ï¿½o
 	private int indexOnPlan;
 	
 	
@@ -39,7 +39,7 @@ public class Island {
 			this.addPortal(new Position((position.getX()+(size/2)),(position.getY()+(size/2)),position.getZ()));//metodo para adicao de portal na ultima ilha do plano
 		}
 		
-		//metodos que adicionarão bridges;
+		//metodos que adicionarï¿½o bridges;
 		if(newIndexOnPlan==0) {
 			this.addBridge(new Position((size+1),(size/2),newTier));
 		}
@@ -92,6 +92,10 @@ public class Island {
 	
 	public void addPokemon(Pokemon p) {
 		this.pokemons.add(p);
+	}
+	
+	public void addCollectable(Collectable c) {
+		this.itens.add(c);
 	}
 	
 	public Position getPosition() {
