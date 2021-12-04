@@ -445,6 +445,7 @@ public class Game {
 			if(player > pokemon) { //Pokemon capturado.
 				this.player.capturePokemon(target);
 				System.out.println(target.getName()+" capturado!");
+				this.wildPokemons.remove(target);
 				this.getPlayerActualIsland().getPokemons().remove(target);
 				return true;
 			}else { //Tentativa falha de captura
